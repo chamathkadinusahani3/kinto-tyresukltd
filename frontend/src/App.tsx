@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 
@@ -23,7 +23,7 @@ function ScrollToTop() {
   return null;
 }
 export function App() {
-  return     <BrowserRouter basename="/kinto-tyresukltd">
+  return <HashRouter>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen font-sans text-white bg-[#0A0A0A]">
         <Header />
@@ -43,5 +43,5 @@ export function App() {
         <Footer />
   
       </div>
-    </BrowserRouter>;
+    </HashRouter>;
 }
