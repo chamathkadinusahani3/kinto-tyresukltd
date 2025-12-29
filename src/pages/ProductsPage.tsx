@@ -302,41 +302,48 @@ export function ProductsPage() {
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
-     {/* Category Navigation */}
+   {/* Category Navigation */}
 <div className="sticky top-[88px] z-30 bg-[#0A0A0A]/95 backdrop-blur-md shadow-sm">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <nav className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory py-4 hide-scrollbar">
-      {categories.map((cat) => {
-        const IconComponent = cat.icon;
-        const isActive = activeCategory === cat.id;
+    <nav className="flex justify-start gap-2 sm:justify-center sm:gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory py-4 hide-scrollbar min-w-max">
+  {categories.map((cat) => {
+    const IconComponent = cat.icon;
+    const isActive = activeCategory === cat.id;
 
-        return (
-          <button
-            key={cat.id}
-            onClick={() => setActiveCategory(cat.id)}
-            className={`flex flex-shrink-0 items-center gap-2 px-5 py-3 whitespace-nowrap font-semibold text-sm md:text-base rounded-full transition-all duration-300 relative snap-start
-              ${isActive ? 'bg-gradient-to-r from-brand-red via-[#ff4d5a] to-brand-red text-white shadow-lg scale-105' : 'text-gray-400 hover:text-white hover:bg-[#1A1A1A]/50'}
-            `}
-          >
-            <IconComponent
-              className={`transition-transform duration-300 ${isActive ? 'w-6 h-6 text-white' : 'w-5 h-5'}`}
-            />
-            <span>{cat.name}</span>
+    return (
+      <button
+        key={cat.id}
+        onClick={() => setActiveCategory(cat.id)}
+        className={`flex flex-shrink-0 items-center gap-1 sm:gap-2 
+          px-2 py-1 sm:px-5 sm:py-3
+          whitespace-nowrap font-semibold text-xs sm:text-sm md:text-base
+          rounded-full transition-all duration-300 relative snap-start
+          ${isActive 
+            ? 'bg-gradient-to-r from-brand-red via-[#ff4d5a] to-brand-red text-white shadow-lg scale-105' 
+            : 'text-gray-400 hover:text-white hover:bg-[#1A1A1A]/50'
+          }`}
+      >
+        <IconComponent
+          className={`transition-transform duration-300 ${isActive ? 'w-4 h-4 sm:w-6 sm:h-6 text-white' : 'w-3 h-3 sm:w-5 sm:h-5'}`}
+        />
+        <span>{cat.name}</span>
+        
+        {isActive && (
+          <motion.div
+            layoutId="categoryIndicator"
+            className="absolute -bottom-1 left-1 right-1 h-1 rounded-full bg-white/80"
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          />
+        )}
+      </button>
+    );
+  })}
+</nav>
 
-            {/* Active underline */}
-            {isActive && (
-              <motion.div
-                layoutId="categoryIndicator"
-                className="absolute -bottom-1 left-2 right-2 h-1 rounded-full bg-white/80"
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              />
-            )}
-          </button>
-        );
-      })}
-    </nav>
   </div>
 </div>
+
+
 
 
       {/* Category Hero */}
