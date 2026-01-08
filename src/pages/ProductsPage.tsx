@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Car, Truck, Bus, Mountain, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/ui/Button';
+
+// Import your images
 import heroCarImg from '../assets/hero-car.png';
 import passengerSuvImg from '../assets/passenger-suv.png';
 import lightTruckImg from '../assets/light-truck.png';
@@ -48,10 +52,6 @@ import KA6 from "../assets/products/offroad/KA6.png";
 import R1 from "../assets/products/offroad/R1.png";
 import PR1 from "../assets/products/offroad/PR1.png";
 
-
-
-import { Button } from '../components/ui/Button';
-
 type Category = 'passenger' | 'light-truck' | 'truck-bus' | 'off-road';
 
 const container = {
@@ -66,6 +66,7 @@ const item = {
 
 export function ProductsPage() {
   const [activeCategory, setActiveCategory] = useState<Category>('passenger');
+  const navigate = useNavigate();
 
   const categories = [
     { id: 'passenger' as Category, name: 'Passenger Car', icon: Car },
@@ -76,56 +77,67 @@ export function ProductsPage() {
 
   const passengerProducts = [
     {
+      id: 'FORZA 001',
       name: 'FORZA 001',
       tagline: 'Deliver a thrilling ride with maximum precision.',
       image: FORZA001,
     },
-    {
+   {
+      id: 'FALCO S88',
       name: 'FALCO S88',
       tagline: 'Perfect balance of dynamic appearance and sport-oriented performance.',
       image: FALCOS88
     },
     {
+      id: 'V-36',
       name: 'V-36',
       tagline: 'Feel the greater stability and control.',
       image: V36,
     },
     {
+      id: 'X-68+',
       name: 'X-68+',
       tagline: 'Enjoy the ultimate handling and grip.',
       image: X68,
     },
     {
+      id: 'SC-900',
       name: 'SC-900',
       tagline: 'Quieter, Safer and Smoother Journey',
       image: SC900,
     },
     {
+      id: 'SC-901',
       name: 'SC-901',
       tagline: 'Cost-effective with long endurance.',
       image: SC901,
     },
     {
+      id: 'ST-51',
       name: 'ST-51',
       tagline: 'Longevity and performance on the highway.',
       image: ST51,
     },
     {
+      id: 'ST-55',
       name: 'ST-55',
       tagline: 'Pure street performance.',
       image: ST55,
     },
     {
+      id: 'SW-89',
       name: 'SW-89',
       tagline: 'High-speed travel on snow and ice.',
       image: SW89,
     },
     {
+      id: 'KAIJU-2',
       name: 'KAIJU-2',
       tagline: 'Meet your daily adventures on and off the road.',
       image:KAIJU2,
     },
     {
+      id: 'SM-5',
       name: 'SM-5',
       tagline: 'Balance performance over various terrains.',
       image:SM5,
@@ -134,16 +146,19 @@ export function ProductsPage() {
 
   const lightTruckProducts = [
     {
+      id: 'PRESA MT',
       name: 'PRESA M/T',
       tagline: 'Experience go-anywhere performance with amazing traction.',
       image: PRESAMT,
     },
     {
+      id: 'FUERTE K99',
       name: 'FUERTE K99',
       tagline: 'Address the multi-purpose needs of modern commercial vehicles.',
       image: FUERTEK99
     },
     {
+      id: 'SM-1',
       name: 'SM-1',
       tagline: 'Gain more mileage through extended periods of wear.',
       image: SM1,
@@ -152,31 +167,37 @@ export function ProductsPage() {
 
   const truckBusProducts = [
     {
+      id: 'KMX707',
       name: 'KMX707',
       tagline: 'Built for Performance and Durability',
       image: KMX707,
     },
     {
+      id: 'SLH101',
       name: 'SLH101',
       tagline: 'Exceptional mileage and retreadability',
       image: SLH101,
     },
     {
+      id: 'SLH100',
       name: 'SLH100',
       tagline: 'Even wear and reduced maintenance costs',
       image: SLH100,
     },
     {
+      id: 'KMX700',
       name: 'KMX700',
       tagline: 'High-performance for demanding routes',
       image: KMX700,
     },
     {
+      id: 'KMX703',
       name: 'KMX703',
       tagline: 'Innovative technology for maximum efficiency',
       image: KMX703,
     },
     {
+      id: 'KMN606',
       name: 'KMN606',
       tagline: 'Reliable performance for commercial fleets',
       image: KMN606,
@@ -185,73 +206,87 @@ export function ProductsPage() {
 
   const offRoadProducts = [
    {
+      id: 'E3L3/E3L3+/E3L3B/ E3L3B+/E3L3C',
       name: 'E3L3/E3L3+/E3L3B/ E3L3B+/E3L3C',
       tagline: 'Innovative technology for maximum efficiency',
       image: E3L3,
     },
     {
+      id: 'G2L2',
       name: 'G2L2',
       tagline: 'Innovative technology for maximum efficiency',
       image: G2L2,
     },
     {
+      id: 'C1',
       name: 'C1',
       tagline: 'Innovative technology for maximum efficiency',
       image: C1,
     },
     {
+      id: 'R3',
       name: 'R3',
       tagline: 'Innovative technology for maximum efficiency',
       image: R3,
     },
     {
+      id: 'R4',
       name: 'R4',
       tagline: 'Innovative technology for maximum efficiency',
       image: R4,
     },
 
     {
+      id: 'L5',
       name: 'L5',
       tagline: 'Innovative technology for maximum efficiency',
       image: L5,
     },
 
     {
+      id: 'XF336',
       name: 'XF336',
       tagline: 'Innovative technology for maximum efficiency',
       image: XF336,
     },
     {
+      id: 'SKS',
       name: 'SKS',
       tagline: 'Innovative technology for maximum efficiency',
       image: SKS,
     },
     {
+      id: 'R1W',
       name: 'R1W',
       tagline: 'Innovative technology for maximum efficiency',
       image: R1W,
     },
     {
+      id: 'XF007',
       name: 'XF007',
       tagline: 'Innovative technology for maximum efficiency',
       image: XF007,
     },
     {
+      id: 'XF208',
       name: 'XF208',
       tagline: 'Innovative technology for maximum efficiency',
       image: XF208,
     },
     {
+      id: 'KA6',
       name: 'KA6',
       tagline: 'Innovative technology for maximum efficiency',
       image: KA6,
     },
     {
+      id: 'R1',
       name: 'R1',
       tagline: 'Innovative technology for maximum efficiency',
       image: R1,
     },
     {
+      id: 'PR1',
       name: 'PR1',
       tagline: 'Innovative technology for maximum efficiency',
       image: PR1,
@@ -263,10 +298,9 @@ export function ProductsPage() {
       title: 'Passenger Car',
       subtitle: 'No matter the journey,',
       headline: 'KINTO TYRES is designed for power and pleasure',
-      description:
-        'Passenger car tires is discovered the thrill of driving, confidence-inspiring grip in the wet road, improved fuel efficiency for real savings, longer-lasting tread life and aiding comfort for smoother journey.',
+      description: 'Passenger car tires is discovered the thrill of driving, confidence-inspiring grip in the wet road, improved fuel efficiency for real savings, longer-lasting tread life and aiding comfort for smoother journey.',
       products: passengerProducts,
-      image:passenger,
+      image: passenger,
     },
     'light-truck': {
       title: 'Light Truck',
@@ -300,9 +334,14 @@ export function ProductsPage() {
 
   const currentContent = categoryContent[activeCategory];
 
+  // Function to handle product click
+  const handleProductClick = (productId: string) => {
+    navigate(`/products/${productId}`);
+  };
+
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
-   {/* Category Navigation */}
+    {/* Category Navigation */}
 <div className="sticky top-[88px] z-30 bg-[#0A0A0A]/95 backdrop-blur-md shadow-sm">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <nav className="flex justify-start gap-2 sm:justify-center sm:gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory py-4 hide-scrollbar min-w-max">
@@ -380,7 +419,6 @@ export function ProductsPage() {
           </motion.div>
         </div>
       </motion.section>
-
       {/* Products Grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -391,7 +429,7 @@ export function ProductsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl font-bold text-white mb-4">
-              {currentContent.title.toUpperCase()} TIRES
+              {currentContent.title.toUpperCase()} TYRES
             </h2>
           </motion.div>
 
@@ -403,9 +441,10 @@ export function ProductsPage() {
           >
             {currentContent.products.map((product, index) => (
               <motion.div
-                key={index}
+                key={product.id}
                 variants={item}
-                className="group bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden hover:border-brand-red/50 transition-all duration-300"
+                className="group bg-[#1A1A1A] border border-[#2A2A2A] rounded-xl overflow-hidden hover:border-brand-red/50 transition-all duration-300 cursor-pointer"
+                onClick={() => handleProductClick(product.id)}
               >
                 <div className="relative aspect-square overflow-hidden bg-[#0A0A0A]">
                   <img
@@ -413,14 +452,19 @@ export function ProductsPage() {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
                   />
-                 
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-red transition-colors">
                     {product.name}
                   </h3>
                   <p className="text-gray-400 text-sm mb-4 line-clamp-2">{product.tagline}</p>
-                  <button className="inline-flex items-center text-brand-red font-medium text-sm hover:underline group">
+                  <button 
+                    className="inline-flex items-center text-brand-red font-medium text-sm hover:underline group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleProductClick(product.id);
+                    }}
+                  >
                     View more
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -429,7 +473,7 @@ export function ProductsPage() {
             ))}
           </motion.div>
 
-          {/* CTA Section */}
+           {/* CTA Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

@@ -10,8 +10,6 @@ import lighttruck from "../assets/lighttruck.png";
 import truckbus from "../assets/truckbus.png";
 import offroad from "../assets/offroad.png";
 import launch from "../assets/launch.png";
-
-// Import your local hero image
 import heroCarImg from '../assets/hero.png';
 
 const container = {
@@ -71,80 +69,89 @@ export function HomePage() {
   return (
     <div className="flex flex-col min-h-screen bg-[#0A0A0A]">
       {/* Hero Section */}
-      <section className="relative h-[600px] md:h-[700px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <motion.img
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: 'easeOut' }}
-            src={heroCarImg} // <-- local image
-            alt="High performance car on track"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
-        </div>
+      {/* Hero Section */}
+<section className="relative h-[600px] md:h-[700px] flex items-center overflow-hidden">
+  
+  {/* YouTube Video Background */}
+  <div className="absolute inset-0 z-0 overflow-hidden">
+    <iframe
+      className="absolute top-1/2 left-1/2 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 scale-110 pointer-events-none"
+      src="https://www.youtube.com/embed/wZrNo51FK_0?autoplay=1&mute=1&loop=1&playlist=wZrNo51FK_0&controls=0&showinfo=0&rel=0"
+      title="KINTO Tyres Hero Video"
+      frameBorder="0"
+      allow="autoplay; fullscreen"
+      allowFullScreen
+    />
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
+  </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-2xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mb-4"
-            >
-              <span className="inline-block px-4 py-2 bg-brand-red/10 border border-brand-red/30 rounded-full text-brand-red text-sm font-semibold tracking-wide uppercase">
-                KINTO Tyres
-              </span>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-            >
-              A Leading Tire Brand
-              <br />
-              from Japan
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl"
-            >
-              It all starts with our passion for innovation, developing
-              superior-quality tires under Japanese engineering.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-base md:text-lg text-gray-400 mb-8 leading-relaxed max-w-xl"
-            >
-              KINTO Tyres has striven to be the best, we push the boundaries of
-              what's possible to improve performance, safety, and quality aiming
-              to be the ideal road companion for every journey.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Button href="/products" className="text-lg px-8 py-4">
-                View Products
-              </Button>
-              <Button
-                href="/about"
-                variant="outline"
-                className="text-white border-white hover:bg-white/10 text-lg px-8 py-4"
-              >
-                Learn More
-              </Button>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+  {/* Content */}
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div className="max-w-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="mb-4"
+      >
+        <span className="inline-block px-4 py-2 bg-brand-red/10 border border-brand-red/30 rounded-full text-brand-red text-sm font-semibold tracking-wide uppercase">
+          KINTO Tyres
+        </span>
+      </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+      >
+        A Leading Tire Brand
+        <br />
+        from Japan
+      </motion.h1>
+
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl"
+      >
+        It all starts with our passion for innovation, developing
+        superior-quality tires under Japanese engineering.
+      </motion.p>
+
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="text-base md:text-lg text-gray-400 mb-8 leading-relaxed max-w-xl"
+      >
+        KINTO Tyres pushes the boundaries of performance, safety, and
+        quality—your ideal road companion.
+      </motion.p>
+
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="flex flex-col sm:flex-row gap-4"
+      >
+        <Button href="/products" className="text-lg px-8 py-4">
+          View Products
+        </Button>
+        <Button
+          href="/about"
+          variant="outline"
+          className="text-white border-white hover:bg-white/10 text-lg px-8 py-4"
+        >
+          Learn More
+        </Button>
+      </motion.div>
+    </div>
+  </div>
+</section>
+
 
       {/* NEW: Tyre Search Section */}
       <TyreSearchHero />

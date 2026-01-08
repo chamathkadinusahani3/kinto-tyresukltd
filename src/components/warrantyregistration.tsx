@@ -72,10 +72,41 @@ export function WarrantyRegistrationForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validate()) {
-      alert('Warranty registered successfully!');
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  const formDataToSend = new FormData();
+
+  // Web3Forms access key
+  formDataToSend.append("access_key", "849064c5-e2ac-4294-89eb-8f5b0ec8f9eb");
+
+  // Email subject
+  formDataToSend.append("subject", "New Warranty Registration");
+
+  // Email where you want to receive data
+  formDataToSend.append("from_name", "Warranty Form");
+  formDataToSend.append("replyto", formData.mobilePhone);
+
+  // Form fields
+  Object.entries(formData).forEach(([key, value]) => {
+    if (value !== null) {
+      formDataToSend.append(key, value as any);
+    }
+  });
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formDataToSend,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Warranty registered successfully!");
+
       setFormData({
         firstName: '',
         surname: '',
@@ -93,9 +124,17 @@ export function WarrantyRegistrationForm() {
         invoiceImage: null,
         acceptedPolicy: false
       });
+
       setErrors({});
+    } else {
+      alert("Something went wrong. Please try again.");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    alert("Submission failed. Please try again later.");
+  }
+};
+
 
   const renderError = (field: keyof WarrantyFormData) =>
     errors[field] ? (

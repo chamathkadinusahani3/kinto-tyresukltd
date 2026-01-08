@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-
+import { TyreSearchHero } from './components/TyreSearchHero';
 import { HomePage } from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -12,18 +12,19 @@ import { WarrantyPage } from './pages/WarrantyPage';
 import { ContactPage } from './pages/ContactPage';
 import { DealerRegistrationPage } from './pages/DealerRegistrationPage';
 import { WarrantyRegistrationForm } from './components/warrantyregistration';
+
 // Scroll to top on route change
 function ScrollToTop() {
-  const {
-    pathname
-  } = useLocation();
+  const { pathname } = useLocation();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return null;
 }
-export function App() {
-  return <HashRouter>
+
+export const App: React.FC = () => {
+  return (
+    <Router>
       <ScrollToTop />
       <div className="flex flex-col min-h-screen font-sans text-white bg-[#0A0A0A]">
         <Header />
@@ -32,16 +33,21 @@ export function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="/search" element={<TyreSearchHero />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/warranty" element={<WarrantyPage />} />
             <Route path="/contact" element={<ContactPage />} />
-             <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
-               <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
+            <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
+            <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
           </Routes>
         </main>
         <Footer />
-  
       </div>
-    </HashRouter>;
-}
+    </Router>
+  );
+};
+
+
+
+
