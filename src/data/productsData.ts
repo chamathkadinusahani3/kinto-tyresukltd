@@ -1221,44 +1221,7 @@ export const products: Product[] = [
     { size: '265/70R17C', loadIndex: '112/109', loadCapacity: '1320/1215', speedRating: 'S', standardRim: '8J', sectionWidth: '272', overallDiameter: '804', maxPressure: '450', utqg: '-' }
   ]
 },
-{
-  id: 'KMX707',
-  name: 'KMX707',
-  category: 'truck-and-bus',
 
-  tagline: 'Deliver a thrilling ride with maximum precision.',
-  description:
-    "Fleets today need more miles, greater retreadability, longer even-wear and less maintenance costs per kilometer from their tires. Given the extreme demands of today's transport industry, Kinto's technology helps you get the most out of your tire investments.",
-
-  image: KMX707, // make sure this image is imported
-
-  features: [
-    'Long-haul durability for truck and bus applications',
-    'Excellent retreadability and even wear',
-    'Reduced cost per kilometer',
-    'Built for extreme transport conditions'
-  ],
-
-  sizes: [
-    {
-      size: '11R22.5',
-      description: '149/146L',
-      plyRating: '18',
-      treadDepth: '15',
-      standardRim: '8.25',
-      ttTl: 'TL'
-    },
-    {
-      size: '295/80R22.5',
-      description: '154/149M',
-      plyRating: '18',
-      treadDepth: '16',
-      standardRim: '9',
-      ttTl: 'TL'
-    }
-  ]
-}
-,
 
 
 ];

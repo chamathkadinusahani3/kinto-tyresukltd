@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "homepage": "https://chamathkadinusahani3.github.io/kinto-tyresukltd",
+ "homepage": "https://chamathkadinusahani3.github.io/kinto-tyresukltd",
   "scripts": {
     "dev": "npx vite",
     "build": "npx vite build",

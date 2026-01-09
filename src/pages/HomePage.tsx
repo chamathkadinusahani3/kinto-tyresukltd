@@ -28,6 +28,7 @@ const item = {
 };
 
 export function HomePage() {
+   const [postcode, setPostcode] = React.useState("");
   const productCategories = [
     {
       id: 'passenger-suv',
@@ -65,6 +66,13 @@ export function HomePage() {
     },
     
   ];
+   const handleDealerSearch = () => {               // <-- Add this
+    if (!postcode) {
+      alert("Please enter a postcode");
+      return;
+    }
+    window.open("https://nutyre.co.uk/find-a-fitter", "_blank");
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#0A0A0A]">
@@ -75,7 +83,7 @@ export function HomePage() {
   {/* YouTube Video Background */}
   <div className="absolute inset-0 z-0 overflow-hidden">
     <iframe
-      className="absolute top-1/2 left-1/2 w-[200%] h-[200%] -translate-x-1/2 -translate-y-1/2 scale-110 pointer-events-none"
+      className="absolute top-1/2 left-1/2 w-[120%] h-[180%] -translate-x-1/2 -translate-y-1/2 scale-110 pointer-events-none"
       src="https://www.youtube.com/embed/wZrNo51FK_0?autoplay=1&mute=1&loop=1&playlist=wZrNo51FK_0&controls=0&showinfo=0&rel=0"
       title="KINTO Tyres Hero Video"
       frameBorder="0"
@@ -95,7 +103,7 @@ export function HomePage() {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="mb-4"
       >
-        <span className="inline-block px-4 py-2 bg-brand-red/10 border border-brand-red/30 rounded-full text-brand-red text-sm font-semibold tracking-wide uppercase">
+        <span className="inline-block px-4 py-2 bg-brand-[#ff0000] border border-brand-[#ff0000] rounded-full text-brand-red text-sm font-semibold tracking-wide uppercase">
           KINTO Tyres
         </span>
       </motion.div>
@@ -153,9 +161,33 @@ export function HomePage() {
 </section>
 
 
+
       {/* NEW: Tyre Search Section */}
       <TyreSearchHero />
 
+ {/* Buy Online + Dealer Search Section */}
+<section className="py-16 md:py-24 px-6 max-w-7xl mx-auto flex flex-col gap-12">
+
+  {/* Buy Online */}
+  <div className="bg-[#ff0000] text-black rounded-xl shadow-lg p-12 text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      BUY ONLINE <span className="block">and get fitted</span>
+    </h2>
+    <p className="mb-6 text-lg md:text-xl text-white">
+      Order your tyres online and get them fitted at a location near you.
+    </p>
+    <Button
+      as="a"
+      href="https://nutyre.co.uk/"
+      target="_blank"
+      className="bg-black text-[#ff0000] hover:bg-gray-900 hover:text-[#ff0000] px-6 py-3 rounded-lg font-semibold transition"
+    >
+      Learn More
+    </Button>
+  </div>
+
+ 
+ 
       {/* Product Categories */}
       <section className="py-16 md:py-24 bg-[#0A0A0A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,7 +218,7 @@ export function HomePage() {
                 <motion.div
                   key={category.id}
                   variants={item}
-                  className="group relative overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#1A1A1A] hover:border-brand-red/50 transition-all duration-300"
+                  className="group relative overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#1A1A1A] hover:border-brand-[#ff0000] transition-all duration-300"
                 >
                   <Link to="/products" className="block">
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -217,6 +249,34 @@ export function HomePage() {
         </div>
       </section>
 
+
+       {/* Dealer Search */}
+  <div className="bg-black text-[#ff0000] rounded-xl shadow-lg p-12 text-center">
+    <h3 className="text-2xl md:text-3xl font-bold mb-4">
+      Search Your Nearest Dealer
+    </h3>
+    <p className="mb-6 text-lg text-white">
+      Enter your UK postcode to find a dealer near you.
+    </p>
+    <div className="flex flex-col md:flex-row justify-center items-center gap-4 max-w-md mx-auto">
+      <input
+        type="text"
+        placeholder="Enter UK postcode"
+        value={postcode}
+        onChange={(e) => setPostcode(e.target.value)}
+        className="p-3 rounded-lg text-black w-full md:flex-1"
+      />
+      <Button
+        onClick={handleDealerSearch}
+        className="bg-red-600 text-black hover:bg-red-500 hover:text-white px-6 py-3 rounded-lg font-semibold transition"
+      >
+        Search
+      </Button>
+    </div>
+  </div>
+
+</section>
+
       {/* Why KINTO Tyres */}
       <section className="py-16 md:py-24 bg-[#111111]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -241,9 +301,9 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 text-center hover:border-brand-red/30 transition-colors"
+              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 text-center hover:border-brand-[#ff0000] transition-colors"
             >
-              <div className="bg-gradient-to-br from-brand-red/20 to-brand-red/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-brand-red/20">
+              <div className="bg-gradient-to-br from-brand-red/20 to-brand-red/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-brand-[#ff0000]">
                 <Award className="w-10 h-10 text-brand-red" />
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Premium Branding</h3>
@@ -258,7 +318,7 @@ export function HomePage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 text-center hover:border-brand-red/30 transition-colors"
+              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 text-center hover:border-brand-[#ff0000] transition-colors"
             >
               <div className="bg-gradient-to-br from-brand-red/20 to-brand-red/5 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-brand-red/20">
                 <Shield className="w-10 h-10 text-brand-red" />
