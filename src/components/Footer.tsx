@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from "../assets/kintologo.png";
+import logo from "../assets/KINTOUKLOGO.png";
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
 export function Footer() {
-  return <footer className="bg-[#0A0A0A] pt-16 pb-8 border-t border-[#2A2A2A]">
+  return <footer className="bg-[#000000] pt-16 pb-8 border-t border-[#2A2A2A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
@@ -13,8 +13,8 @@ export function Footer() {
               alt="Kinto Logo"
               className="h-10 w-auto object-contain group-hover:opacity-80 transition"
             />
-            <p className="text-gray-400 text-sm leading-relaxed">
-              A leading tire brand from Japan, developing superior-quality tires
+            <p className="text-gray-400 text-large leading-relaxed">
+              A leading tyre brand from Japan, developing superior-quality tyres
               under Japanese engineering for over 50 years.
             </p>
             <div className="flex space-x-4 pt-2">
@@ -35,32 +35,32 @@ export function Footer() {
 
           {/* Menu */}
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h3 className="text-large font-semibold text-white uppercase tracking-wider mb-4">
               Menu
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/products" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <Link to="/products" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   Product
                 </Link>
               </li>
               <li>
-                <Link to="/news" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <Link to="/news" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   News
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <Link to="/about" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/warranty" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <Link to="/warranty" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   Warranty
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <Link to="/contact" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -69,17 +69,17 @@ export function Footer() {
 
           {/* Head Office */}
           <div>
-            <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            <h3 className="text-large font-semibold text-white uppercase tracking-wider mb-4">
               Head Office
             </h3>
             <div className="space-y-4">
               <div>
-                <p className="text-white font-medium text-sm mb-2">
-                  KINTO TYRE UK LTD
+                <p className="text-white font-medium text-large mb-2">
+                  KINTO TYRES UK LTD
                 </p>
                 <div className="flex items-start">
                   <MapPin className="w-4 h-4 text-brand-red mr-2 mt-1 flex-shrink-0" />
-                  <p className="text-gray-400 text-sm leading-relaxed">
+                  <p className="text-gray-400 text-large leading-relaxed">
                     132, Great North Road 
                     <br />
                     Hatfield , Hertfordshire,
@@ -99,21 +99,21 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Phone className="w-4 h-4 text-brand-red mr-2 mt-0.5 flex-shrink-0" />
-                <div className="text-sm">
+                <div className="text-large">
                   <a href="tel:+81358886306" className="text-gray-400 hover:text-brand-red transition-colors block">
-                    +447886686142
+                    +44 7886 686142
                   </a>
                   <a href="tel:+6621089312" className="text-gray-400 hover:text-brand-red transition-colors block mt-1">
-                    +441707912085
+                    +44 1707 912085
                   </a>
-                  <span className="text-gray-500 text-xs">
+                  <span className="text-gray-500 text-large">
                 
                   </span>
                 </div>
               </li>
               <li className="flex items-start">
                 <Mail className="w-4 h-4 text-brand-red mr-2 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@kinto-tyres.com" className="text-gray-400 hover:text-brand-red text-sm transition-colors">
+                <a href="mailto:info@kinto-tyres.com" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   info@kinto-tyres.co.uk 
                 </a>
               </li>

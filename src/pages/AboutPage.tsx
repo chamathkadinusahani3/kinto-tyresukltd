@@ -1,8 +1,6 @@
 import React from 'react';
 import { CheckCircle, Globe, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-// ✅ IMPORT HERO IMAGE
 import heroImage from '../assets/aboutus.png';
 
 const fadeInUp = {
@@ -37,7 +35,7 @@ export function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            className="text-4xl md:text-5xl font-bold mb-6"
           >
             About KINTO Tyres UK Ltd
           </motion.h1>
@@ -48,14 +46,14 @@ export function AboutPage() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-xl text-gray-200"
           >
-            KINTO Tyres UK Ltd is a UK private limited company, established in 2025.
-            We bring high-quality, affordable Japanese KINTO Tyres to drivers across the UK.
+            KINTO Tyres UK Ltd brings high-quality, affordable Japanese KINTO Tyres to drivers across
+            the United Kingdom, ensuring safety, performance, and peace of mind on every journey.
           </motion.p>
         </div>
       </div>
 
       {/* ================= CONTENT SECTION ================= */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 space-y-24">
 
         {/* Company Info */}
         <motion.div
@@ -63,22 +61,18 @@ export function AboutPage() {
           whileInView="show"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="mb-24"
+          className="space-y-6"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">Our Company</h2>
+          <h2 className="text-3xl font-bold mb-6">Our Company</h2>
 
-          <p className="text-gray-400 text-lg leading-relaxed mb-4">
+          <p className="text-gray-400 text-lg leading-relaxed">
             <strong>Registered Office:</strong> 132 Great North Road, Hatfield, England, AL9 5JN
           </p>
 
-          <p className="text-gray-400 text-lg leading-relaxed mb-4">
-            <strong>Company Type:</strong> Private Limited Company
-          </p>
+        
 
           <p className="text-gray-400 text-lg leading-relaxed">
-            KINTO Tyres UK Ltd is separate from KINTO UK Limited, which provides fleet and mobility
-            solutions as part of the Toyota family. We are dedicated solely to providing high-quality
-            tyres to UK drivers.
+            KINTO Tyres UK Ltd is dedicated to providing high-quality tyres to drivers across the United Kingdom. We cater to everyday car owners, fleet operators, and commercial vehicle drivers, ensuring our products meet the highest global standards for safety, durability, and performance.
           </p>
         </motion.div>
 
@@ -88,20 +82,87 @@ export function AboutPage() {
           whileInView="show"
           viewport={{ once: true }}
           variants={fadeInUp}
-          className="mb-24"
+          className="space-y-6"
         >
-          <h2 className="text-3xl font-bold text-white mb-6">Our Brand</h2>
+          <h2 className="text-3xl font-bold mb-6">Our Brand</h2>
 
           <p className="text-gray-400 text-lg leading-relaxed mb-4">
-            KINTO Tyres is a Japanese brand focused on delivering safe, reliable, and affordable tyres
-            for a wide range of vehicles.
+            KINTO Tyres is a Japanese-owned brand with a passion for creating affordable tyres 
+            without compromising on quality. Every tyre undergoes strict quality checks to ensure excellence in:
+          </p>
+
+          <ul className="text-gray-400 list-disc list-inside space-y-1 mb-4">
+            <li>Wet & Dry Handling and Braking</li>
+            <li>High-Speed Stability</li>
+            <li>Cornering Grip</li>
+            <li>Traction</li>
+            <li>Aquaplaning Resistance</li>
+            <li>Fuel Efficiency</li>
+            <li>Durability and Long-Term Reliability</li>
+          </ul>
+
+          <p className="text-gray-400 text-lg leading-relaxed">
+            With safety, innovation, and customer confidence at the heart of everything we do, KINTO Tyres 
+            is a brand drivers and partners can rely on.
+          </p>
+        </motion.div>
+
+        {/* Vision & Mission */}
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          className="space-y-6"
+        >
+          <h2 className="text-3xl font-bold mb-6">Vision & Mission</h2>
+
+          <p className="text-gray-400 text-lg leading-relaxed mb-2">
+            <strong>Vision:</strong> To be the leading tyre brand in the UK, recognised for quality, innovation, and a seamless driving experience.
           </p>
 
           <p className="text-gray-400 text-lg leading-relaxed">
-            Our tyres are engineered for excellent handling, durability, and performance in all
-            driving conditions.
+            <strong>Mission:</strong> To provide high-quality, safe, and reliable tyres through a nationwide dealer network, ensuring drivers can access the best products and services easily and confidently.
           </p>
         </motion.div>
+
+        {/* Certificates */}
+        {/* ================= CERTIFICATES SECTION ================= */}
+<motion.div
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: true }}
+  variants={fadeInUp}
+  className="space-y-6"
+>
+  <h2 className="text-3xl font-bold mb-8 text-center">Certificates & Accreditations</h2>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+    {[
+      { code: 'ECE', desc: 'Economic Commission of Europe' },
+      { code: 'DOT', desc: 'Department Of Transportation, United States' },
+      { code: 'CCC', desc: 'China Compulsory Certificate' },
+      { code: 'TISI', desc: 'Thai Industrial Standards Institute' },
+      { code: 'GSO', desc: 'GCC Standardization Organization' },
+      { code: 'SASO', desc: 'The Saudi Standards, Metrology and Quality Organization' },
+      { code: 'PS', desc: 'Philippine Standard Quality and/or Safety Mark' },
+      { code: 'VR', desc: 'Vietnam Register Quality and Safety Management' }
+    ].map((cert, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 }}
+        className="bg-gradient-to-b from-[#1A1A1A] to-[#111111] rounded-2xl p-6 flex flex-col items-center justify-center text-center shadow-lg hover:shadow-xl transition-shadow duration-300"
+      >
+        <h3 className="text-xl font-bold mb-2">{cert.code}</h3>
+        <p className="text-gray-400 text-sm">{cert.desc}</p>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
 
         {/* Core Values */}
         <div>

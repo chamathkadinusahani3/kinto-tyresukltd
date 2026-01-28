@@ -12,6 +12,7 @@ import { WarrantyPage } from './pages/WarrantyPage';
 import { ContactPage } from './pages/ContactPage';
 import { DealerRegistrationPage } from './pages/DealerRegistrationPage';
 import { WarrantyRegistrationForm } from './components/warrantyregistration';
+import { DealersPage } from './pages/DealersPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -38,6 +39,7 @@ export const App: React.FC = () => {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/warranty" element={<WarrantyPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/dealers" element={<DealersPage />} />
             <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
             <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
           </Routes>

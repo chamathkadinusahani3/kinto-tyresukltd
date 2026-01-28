@@ -1,7 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from "../assets/kintologo.png";
+import logo from "../assets/KINTOUKLOGO.png";
 import { motion, AnimatePresence } from 'framer-motion';
 interface MobileMenuProps {
   isOpen: boolean;
@@ -53,12 +53,12 @@ export function MobileMenu({
         type: 'spring',
         damping: 25,
         stiffness: 200
-      }} className="absolute right-0 top-0 bottom-0 w-[300px] bg-[#1A1A1A] border-l border-[#2A2A2A] shadow-2xl flex flex-col">
-            <div className="p-6 flex justify-between items-center border-b border-[#2A2A2A]">
+      }} className="absolute right-0 top-0 bottom-0 w-[300px] bg-[#000000] border-l border-[#2A2A2A] shadow-2xl flex flex-col">
+            <div className="p-6 flex justify-between items-center border-b border-[#000000]">
               <img
               src={logo}
               alt="Kinto Logo"
-              className="h-10 w-auto object-contain group-hover:opacity-80 transition"
+              className="h-14 w-auto object-contain group-hover:opacity-80 transition"
             />
               <button onClick={onClose} className="p-2 text-gray-400 hover:text-white hover:bg-[#2A2A2A] rounded-full transition-colors" aria-label="Close menu">
                 <X className="w-6 h-6" />
@@ -80,7 +80,7 @@ export function MobileMenu({
                 <p>
                   Call us:{' '}
                   <a href="tel:+1234567890" className="text-gray-200 font-medium hover:text-brand-red transition-colors">
-                   +447886686142
+                   +44 7886 686142
                   </a>
                 </p>
                 <p>

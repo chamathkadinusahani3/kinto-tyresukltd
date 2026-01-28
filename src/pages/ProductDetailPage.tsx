@@ -1,52 +1,199 @@
+// ProductDetailPage.tsx - Updated with product-specific tables
+
 import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Check, ArrowLeft, Shield, Truck, Zap } from 'lucide-react';
+import { Check, ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { motion } from 'framer-motion';
 import { products } from '../data/productsData';
 
-
-
-interface OffRoadSize {
-  size: string;
-  pr: string;
-  standardRim: string;
-  treadDepth: string;
-  inflatedPressure: string;
-  sectionWidth: string;
-  overallDiameter: string;
-  ttTl: string;
+// Table component for Passenger Car tyres
+function PassengerCarTable({ sizes }: { sizes: any[] }) {
+  return (
+    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-brand-red text-white">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Size</th>
+              <th className="px-4 py-3 text-left font-semibold">Loading Index</th>
+              <th className="px-4 py-3 text-left font-semibold">Load Capacity (kg)</th>
+              <th className="px-4 py-3 text-left font-semibold">Speed Rating</th>
+              <th className="px-4 py-3 text-left font-semibold">Standard Rim</th>
+              <th className="px-4 py-3 text-left font-semibold">Section Width (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Overall Diameter (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Max. Pressure (kPa)</th>
+              <th className="px-4 py-3 text-left font-semibold">UTQG</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#2A2A2A]">
+            {sizes.map((size, index) => (
+              <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{size.size}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadIndex}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadCapacity}</td>
+                <td className="px-4 py-3 text-gray-300">{size.speedRating}</td>
+                <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
+                <td className="px-4 py-3 text-gray-300">{size.sectionWidth}</td>
+                <td className="px-4 py-3 text-gray-300">{size.overallDiameter}</td>
+                <td className="px-4 py-3 text-gray-300">{size.maxPressure}</td>
+                <td className="px-4 py-3 text-gray-300">{size.utqg}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
-interface TruckBusSize {
-  size: string;
-  description: string;
-  plyRating: string;
-  treadDepth: string;
-  standardRim: string;
-  ttTl: string;
+// Table component for Light Truck tyres
+function LightTruckTable({ sizes }: { sizes: any[] }) {
+  return (
+    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-brand-red text-white">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Size</th>
+              <th className="px-4 py-3 text-left font-semibold">Ply</th>
+              <th className="px-4 py-3 text-left font-semibold">Loading Index</th>
+              <th className="px-4 py-3 text-left font-semibold">Load Capacity (kg)</th>
+              <th className="px-4 py-3 text-left font-semibold">Speed Rating</th>
+              <th className="px-4 py-3 text-left font-semibold">Standard Rim</th>
+              <th className="px-4 py-3 text-left font-semibold">Section Width (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Overall Diameter (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Max. Pressure (kPa)</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#2A2A2A]">
+            {sizes.map((size, index) => (
+              <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{size.size}</td>
+                <td className="px-4 py-3 text-gray-300">{size.ply || '-'}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadIndex}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadCapacity}</td>
+                <td className="px-4 py-3 text-gray-300">{size.speedRating}</td>
+                <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
+                <td className="px-4 py-3 text-gray-300">{size.sectionWidth}</td>
+                <td className="px-4 py-3 text-gray-300">{size.overallDiameter}</td>
+                <td className="px-4 py-3 text-gray-300">{size.maxPressure}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// Table component for Truck & Bus tyres
+function TruckBusTable({ sizes }: { sizes: any[] }) {
+  return (
+    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-brand-red text-white">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Size</th>
+              <th className="px-4 py-3 text-left font-semibold">Description</th>
+              <th className="px-4 py-3 text-left font-semibold">Ply Rating</th>
+              <th className="px-4 py-3 text-left font-semibold">Tread Depth (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Standard Rim</th>
+              <th className="px-4 py-3 text-left font-semibold">TT/TL</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#2A2A2A]">
+            {sizes.map((size, index) => (
+              <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{size.size}</td>
+                <td className="px-4 py-3 text-gray-300">{size.description}</td>
+                <td className="px-4 py-3 text-gray-300">{size.plyRating}</td>
+                <td className="px-4 py-3 text-gray-300">{size.treadDepth}</td>
+                <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
+                <td className="px-4 py-3 text-gray-300">{size.ttTl}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// Table component for Off-Road tyres
+function OffRoadTable({ sizes }: { sizes: any[] }) {
+  return (
+    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-brand-red text-white">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Size</th>
+              <th className="px-4 py-3 text-left font-semibold">PR</th>
+              <th className="px-4 py-3 text-left font-semibold">Standard Rim</th>
+              <th className="px-4 py-3 text-left font-semibold">Load Capacity (kg) / Inflated Pressure (kPa)</th>
+              <th className="px-4 py-3 text-left font-semibold">Section Width (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Overall Diameter (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">TTF/TL</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#2A2A2A]">
+            {sizes.map((size, index) => (
+              <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{size.size}</td>
+                <td className="px-4 py-3 text-gray-300">{size.pr}</td>
+                <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadCapacityPressure}</td>
+                <td className="px-4 py-3 text-gray-300">{size.sectionWidth}</td>
+                <td className="px-4 py-3 text-gray-300">{size.overallDiameter}</td>
+                <td className="px-4 py-3 text-gray-300">{size.ttfTl}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 export function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-
-  // Find the product by ID
   const product = products.find(p => p.id === id);
 
-  // If product not found, show error
   if (!product) {
     return (
       <div className="bg-[#0A0A0A] min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-4">Product Not Found</h1>
-          <Button onClick={() => navigate('/products')}>
-            Back to Products
-          </Button>
+          <Button onClick={() => navigate('/products')}>Back to Products</Button>
         </div>
       </div>
     );
   }
+
+  // Render the appropriate table based on product category
+  const renderSpecificationTable = () => {
+    switch (product.category) {
+      case 'passenger':
+      case 'suv':
+      case '4x4':
+        return <PassengerCarTable sizes={product.sizes} />;
+      
+      case 'light-truck':
+        return <LightTruckTable sizes={product.sizes} />;
+      
+      case 'truck-bus':
+        return <TruckBusTable sizes={product.sizes} />;
+      
+      case 'off-road':
+        return <OffRoadTable sizes={product.sizes} />;
+      
+      default:
+        return <PassengerCarTable sizes={product.sizes} />;
+    }
+  };
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen py-12">
@@ -97,9 +244,8 @@ export function ProductDetailPage() {
               )}
             </div>
 
-            <h1 className="text-4xl font-bold text-white mb-4">
-              {product.name}
-            </h1>
+            <h1 className="text-4xl font-bold text-white mb-4">{product.name}</h1>
+            
             {product.priceRange && (
               <p className="text-2xl font-medium text-brand-red mb-6">
                 {product.priceRange}
@@ -111,9 +257,7 @@ export function ProductDetailPage() {
             </p>
 
             <div className="border-t border-[#2A2A2A] py-8 mb-8">
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Key Features
-              </h3>
+              <h3 className="text-lg font-semibold text-white mb-4">Key Features</h3>
               <ul className="grid grid-cols-1 gap-y-3">
                 {product.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
@@ -124,7 +268,7 @@ export function ProductDetailPage() {
               </ul>
             </div>
 
-            {/* Available Sizes */}
+            {/* Available Sizes Summary */}
             <div className="mb-8">
               <h3 className="text-lg font-semibold text-white mb-4">
                 Available Sizes ({product.sizes.length})
@@ -136,11 +280,9 @@ export function ProductDetailPage() {
                       key={index}
                       className="bg-[#0A0A0A] border border-[#2A2A2A] rounded-lg p-3 hover:border-brand-red/50 transition-colors"
                     >
-                      <div className="text-white font-semibold text-sm">
-                        {size.size}
-                      </div>
+                      <div className="text-white font-semibold text-sm">{size.size}</div>
                       <div className="text-gray-500 text-xs mt-1">
-                        {size.speedRating} Rated
+                        {size.speedRating || size.pr} Rated
                       </div>
                     </div>
                   ))}
@@ -152,18 +294,10 @@ export function ProductDetailPage() {
                 )}
               </div>
             </div>
-
-            
-
-            <div className="grid grid-cols-3 gap-4 text-center">
-              
-             
-              
-            </div>
           </motion.div>
         </div>
 
-        {/* Full Specifications Table */}
+        {/* Full Specifications Table - Product Specific */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -173,110 +307,8 @@ export function ProductDetailPage() {
           <h2 className="text-2xl font-bold text-white mb-6">
             Complete Size Specifications
           </h2>
-          <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                
-                <thead className="bg-[#0A0A0A] border-b border-[#2A2A2A]">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Size</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Loading Index</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Load Capacity(kg)</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Speed Rating</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Standard Rim</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Section Width</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Overall Diameter(mm)</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">Max. Pressure(kPa)</th>
-                    <th className="px-4 py-3 text-left text-gray-400 font-semibold">UTQG</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-[#2A2A2A]">
-                  {product.sizes.map((size, index) => (
-                    <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
-                      <td className="px-4 py-3 text-white font-medium">{size.size}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.loadIndex}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.loadCapacity} </td>
-                      <td className="px-4 py-3 text-gray-300">{size.speedRating}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.sectionWidth}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.overallDiameter}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.maxPressure}</td>
-                      <td className="px-4 py-3 text-gray-300">{size.utqg}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          {renderSpecificationTable()}
         </motion.div>
-      </div>
-    </div>
-  );
-}
-export function OffRoadSizeTable({ sizes }: { sizes: OffRoadSize[] }) {
-  return (
-    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="bg-[#0A0A0A] border-b border-[#2A2A2A]">
-            <tr>
-              <th className="px-4 py-3 text-left text-gray-400">Size</th>
-              <th className="px-4 py-3 text-left text-gray-400">PR</th>
-              <th className="px-4 py-3 text-left text-gray-400">Standard Rim</th>
-              <th className="px-4 py-3 text-left text-gray-400">Tread Depth (mm)</th>
-              <th className="px-4 py-3 text-left text-gray-400">Inflated Pressure (kPa)</th>
-              <th className="px-4 py-3 text-left text-gray-400">Section Width (mm)</th>
-              <th className="px-4 py-3 text-left text-gray-400">Overall Diameter (mm)</th>
-              <th className="px-4 py-3 text-left text-gray-400">TT / TL</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#2A2A2A]">
-            {sizes.map((s, i) => (
-              <tr key={i} className="hover:bg-[#0A0A0A]">
-                <td className="px-4 py-3 text-white font-medium">{s.size}</td>
-                <td className="px-4 py-3 text-gray-300">{s.pr}</td>
-                <td className="px-4 py-3 text-gray-300">{s.standardRim}</td>
-                <td className="px-4 py-3 text-gray-300">{s.treadDepth}</td>
-                <td className="px-4 py-3 text-gray-300">{s.inflatedPressure}</td>
-                <td className="px-4 py-3 text-gray-300">{s.sectionWidth}</td>
-                <td className="px-4 py-3 text-gray-300">{s.overallDiameter}</td>
-                <td className="px-4 py-3 text-gray-300">{s.ttTl}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-export function TruckBusSizeTable({ sizes }: { sizes: TruckBusSize[] }) {
-  return (
-    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="bg-[#0A0A0A] border-b border-[#2A2A2A]">
-            <tr>
-              <th className="px-4 py-3 text-left text-gray-400">Size</th>
-              <th className="px-4 py-3 text-left text-gray-400">Description</th>
-              <th className="px-4 py-3 text-left text-gray-400">Ply Rating</th>
-              <th className="px-4 py-3 text-left text-gray-400">Tread Depth (mm)</th>
-              <th className="px-4 py-3 text-left text-gray-400">Standard Rim</th>
-              <th className="px-4 py-3 text-left text-gray-400">TT / TL</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[#2A2A2A]">
-            {sizes.map((s, i) => (
-              <tr key={i} className="hover:bg-[#0A0A0A]">
-                <td className="px-4 py-3 text-white font-medium">{s.size}</td>
-                <td className="px-4 py-3 text-gray-300">{s.description}</td>
-                <td className="px-4 py-3 text-gray-300">{s.plyRating}</td>
-                <td className="px-4 py-3 text-gray-300">{s.treadDepth}</td>
-                <td className="px-4 py-3 text-gray-300">{s.standardRim}</td>
-                <td className="px-4 py-3 text-gray-300">{s.ttTl}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
     </div>
   );

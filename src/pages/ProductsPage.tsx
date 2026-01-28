@@ -26,6 +26,7 @@ import SC901 from "../assets/products/passenger/SC901.png";
 import ST51 from "../assets/products/passenger/ST51.png";
 import ST55 from "../assets/products/passenger/ST55.png";
 import SW89 from "../assets/products/passenger/SW89.png";
+import SW99 from "../assets/products/passenger/SW99.png";
 import KAIJU2 from "../assets/products/passenger/KAIJU2.png";
 import SM5 from "../assets/products/passenger/SM5.png";
 import PRESAMT from "../assets/products/lighrtruck/PRESAMT.png";
@@ -37,19 +38,33 @@ import SLH100 from "../assets/products/truckbus/SLH100.png";
 import KMX700 from "../assets/products/truckbus/KMX700.png";
 import KMX703 from "../assets/products/truckbus/KMX703.png";
 import KMN606 from "../assets/products/truckbus/KMN606.png";
+import RGN200 from "../assets/products/truckbus/RGN200.png";
 import E3L3 from "../assets/products/offroad/E3L3.png";
+import E3L3PLUS from "../assets/products/offroad/E3L3+.png";
+import E3L3B from "../assets/products/offroad/E3L3B.png";
+import E3L3BPLUS from "../assets/products/offroad/E3L3B+.png";
+import E3L3C from "../assets/products/offroad/E3L3C.png";
 import G2L2 from "../assets/products/offroad/G2L2.png";
 import C1 from "../assets/products/offroad/C1.png";
+import L5S from "../assets/products/offroad/L5S.png";
 import R3 from "../assets/products/offroad/R3.png";
 import R4 from "../assets/products/offroad/R4.png";
 import L5 from "../assets/products/offroad/L5.png";
 import XF336 from "../assets/products/offroad/XF336.png";
-import SKS from "../assets/products/offroad/SKS.png";
+import SKS1 from "../assets/products/offroad/SKS1.png";
+import SKS3 from "../assets/products/offroad/SKS3.png";
 import R1W from "../assets/products/offroad/R1W.png";
 import XF007 from "../assets/products/offroad/XF007.png";
+import XF007A from "../assets/products/offroad/XF007A.png";
 import XF208 from "../assets/products/offroad/XF208.png";
 import KA6 from "../assets/products/offroad/KA6.png";
 import R1 from "../assets/products/offroad/R1.png";
+import R1PLUS from "../assets/products/offroad/R1PLUS.png";
+import R1MIN1 from "../assets/products/offroad/R1MIN1.png";
+import R1MIN2 from "../assets/products/offroad/R1MIN2.png";
+import R1MIN3 from "../assets/products/offroad/R1MIN3.png";
+import R1MIN4 from "../assets/products/offroad/R1MIN4.png";
+import R1MIN5 from "../assets/products/offroad/R1MIN5.png";
 import PR1 from "../assets/products/offroad/PR1.png";
 
 type Category = 'passenger' | 'light-truck' | 'truck-bus' | 'off-road';
@@ -131,6 +146,12 @@ export function ProductsPage() {
       image: SW89,
     },
     {
+      id: 'SW99',
+      name: 'SW-99',
+      tagline: 'High-speed travel on snow and ice.',
+      image: SW99,
+    },
+    {
       id: 'KAIJU-2',
       name: 'KAIJU-2',
       tagline: 'Meet your daily adventures on and off the road.',
@@ -201,15 +222,45 @@ export function ProductsPage() {
       name: 'KMN606',
       tagline: 'Reliable performance for commercial fleets',
       image: KMN606,
+    },
+    {
+      id: 'RGN200',
+      name: 'RGN200',
+      tagline: 'Reliable performance for commercial fleets',
+      image: RGN200,
     }
   ];
 
   const offRoadProducts = [
    {
-      id: 'E3L3/E3L3+/E3L3B/ E3L3B+/E3L3C',
-      name: 'E3L3/E3L3+/E3L3B/ E3L3B+/E3L3C',
+      id: 'E3L3',
+      name: 'E3L3',
       tagline: 'Innovative technology for maximum efficiency',
       image: E3L3,
+    },
+    {
+      id: 'E3L3+',
+      name: 'E3L3+',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: E3L3PLUS,
+    },
+    {
+      id: 'E3L3B',
+      name: 'E3L3B',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: E3L3B,
+    },
+    {
+      id: 'E3L3B+',
+      name: 'E3L3B+',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: E3L3BPLUS,
+    },
+    {
+      id: 'E3L3C',
+      name: 'E3L3C',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: E3L3C,
     },
     {
       id: 'G2L2',
@@ -222,6 +273,12 @@ export function ProductsPage() {
       name: 'C1',
       tagline: 'Innovative technology for maximum efficiency',
       image: C1,
+    },
+     {
+      id: 'L5S',
+      name: 'L5S',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: L5S,
     },
     {
       id: 'R3',
@@ -250,10 +307,16 @@ export function ProductsPage() {
       image: XF336,
     },
     {
-      id: 'SKS',
-      name: 'SKS',
+      id: 'SKS1',
+      name: 'SKS1',
       tagline: 'Innovative technology for maximum efficiency',
-      image: SKS,
+      image: SKS1,
+    },
+    {
+      id: 'SKS3',
+      name: 'SKS3',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: SKS3,
     },
     {
       id: 'R1W',
@@ -266,6 +329,12 @@ export function ProductsPage() {
       name: 'XF007',
       tagline: 'Innovative technology for maximum efficiency',
       image: XF007,
+    },
+    {
+      id: 'XF007A',
+      name: 'XF007A',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: XF007A,
     },
     {
       id: 'XF208',
@@ -286,6 +355,43 @@ export function ProductsPage() {
       image: R1,
     },
     {
+      id: 'R1PLUS',
+      name: 'R1+',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1PLUS,
+    },
+    {
+      id: 'R1MIN1',
+      name: 'R1-1',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1MIN1,
+    },
+    {
+      id: 'R1MIN2',
+      name: 'R1-2',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1MIN2,
+    },
+    {
+      id: 'R1MIN3',
+      name: 'R1-3',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1MIN3,
+    },
+    {
+      id: 'R1MIN4',
+      name: 'R1-4',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1MIN4,
+    },
+    {
+      id: 'R1MIN5',
+      name: 'R1-5',
+      tagline: 'Innovative technology for maximum efficiency',
+      image: R1MIN5,
+    },
+
+    {
       id: 'PR1',
       name: 'PR1',
       tagline: 'Innovative technology for maximum efficiency',
@@ -298,7 +404,7 @@ export function ProductsPage() {
       title: 'Passenger Car',
       subtitle: 'No matter the journey,',
       headline: 'KINTO TYRES is designed for power and pleasure',
-      description: 'Passenger car tires is discovered the thrill of driving, confidence-inspiring grip in the wet road, improved fuel efficiency for real savings, longer-lasting tread life and aiding comfort for smoother journey.',
+      description: 'Passenger car tyres is discovered the thrill of driving, confidence-inspiring grip in the wet road, improved fuel efficiency for real savings, longer-lasting tread life and aiding comfort for smoother journey.',
       products: passengerProducts,
       image: passenger,
     },
@@ -307,16 +413,16 @@ export function ProductsPage() {
       subtitle: 'Go Anywhere!',
       headline: 'Allowing you to explore challenging terrain',
       description:
-        'Premium quality All-Terrain tires are exclusively engineered for excellent Off-Road capabilities while delivering On-Road performance.',
+        'Premium quality All-Terrain tyres are exclusively engineered for excellent Off-Road capabilities while delivering On-Road performance.',
       products: lightTruckProducts,
       image:lighttruck,
     },
     'truck-bus': {
       title: 'Truck & Bus',
-      subtitle: 'Truck and Bus Tires',
+      subtitle: 'Truck and Bus Tyres',
       headline: 'Built for Performance and Durability',
       description:
-        "Fleets today rely on high-performance truck and bus tires to deliver exceptional mileage, retreadability, even wear, and reduced maintenance costs per kilometer.",
+        "Fleets today rely on high-performance truck and bus tyres to deliver exceptional mileage, retreadability, even wear, and reduced maintenance costs per kilometer.",
       products: truckBusProducts,
       image:truckbus,
     },
@@ -326,7 +432,7 @@ export function ProductsPage() {
       headline:
         'KINTO OTR Tyres helps you get the maximum benefit for your business',
       description:
-        'LOADER / GRADER / DUMP TRUCK / INDUSTRIAL MACHINERY / REACHSTACKER / EMPTY CONTAINER HANDLER / HEAVY FORKLIFT / TRACTOR / FORESTRY MACHINERY / HARVESTER / SPRAYER / FARM IMPLEMENT / TRAILER / SPREADER / GRAIN CART / SOIL PREPARATION & IRRIGATION EQUIPMENT.',
+        'Loader, Grader, Dump Truck, Industrial Machinery, Reachstacker, Empty Container Handler, Heavy Forklift, Tractor, Forestry Machinery, Harvester, Sprayer, Farm Implement, Trailer, Spreader, Grain Cart, Soil Preparation & Irrigation Equipment',
       products: offRoadProducts,
       image:offroad,
     }
@@ -341,84 +447,109 @@ export function ProductsPage() {
 
   return (
     <div className="bg-[#0A0A0A] min-h-screen">
-    {/* Category Navigation */}
-<div className="sticky top-[88px] z-30 bg-[#0A0A0A]/95 backdrop-blur-md shadow-sm">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <nav className="flex justify-start gap-2 sm:justify-center sm:gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory py-4 hide-scrollbar min-w-max">
-  {categories.map((cat) => {
-    const IconComponent = cat.icon;
-    const isActive = activeCategory === cat.id;
 
-    return (
-      <button
-        key={cat.id}
-        onClick={() => setActiveCategory(cat.id)}
-        className={`flex flex-shrink-0 items-center gap-1 sm:gap-2 
-          px-2 py-1 sm:px-5 sm:py-3
-          whitespace-nowrap font-semibold text-xs sm:text-sm md:text-base
-          rounded-full transition-all duration-300 relative snap-start
-          ${isActive 
-            ? 'bg-gradient-to-r from-brand-red via-[#ff4d5a] to-brand-red text-white shadow-lg scale-105' 
-            : 'text-gray-400 hover:text-white hover:bg-[#1A1A1A]/50'
-          }`}
-      >
-        <IconComponent
-          className={`transition-transform duration-300 ${isActive ? 'w-4 h-4 sm:w-6 sm:h-6 text-white' : 'w-3 h-3 sm:w-5 sm:h-5'}`}
-        />
-        <span>{cat.name}</span>
-        
-        {isActive && (
-          <motion.div
-            layoutId="categoryIndicator"
-            className="absolute -bottom-1 left-1 right-1 h-1 rounded-full bg-white/80"
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          />
-        )}
-      </button>
-    );
-  })}
-</nav>
+    
+  {/* Category Navigation */}
+  <div className="sticky top-[88px] z-30 bg-[#0A0A0A]/95 backdrop-blur-md shadow-sm">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      {/* SCROLL CONTAINER */}
+      <div className="overflow-x-auto hide-scrollbar">
+        <nav
+          className="
+            flex flex-nowrap gap-2 sm:gap-4
+            py-4
+            min-w-max
+            snap-x snap-mandatory
+          "
+        >
+          {categories.map((cat) => {
+            const IconComponent = cat.icon;
+            const isActive = activeCategory === cat.id;
 
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`flex items-center gap-1 sm:gap-2
+                  flex-shrink-0
+                  px-3 py-2 sm:px-5 sm:py-3
+                  whitespace-nowrap
+                  font-semibold text-xs sm:text-sm md:text-base
+                  rounded-full
+                  transition-all duration-300
+                  relative snap-start
+                  ${
+                    isActive
+                      ? 'bg-gradient-to-r from-brand-red via-[#ff4d5a] to-brand-red text-white shadow-lg scale-105'
+                      : 'text-gray-400 hover:text-white hover:bg-[#1A1A1A]/50'
+                  }`}
+              >
+                <IconComponent
+                  className={`transition-transform duration-300 ${
+                    isActive
+                      ? 'w-4 h-4 sm:w-6 sm:h-6 text-white'
+                      : 'w-3 h-3 sm:w-5 sm:h-5'
+                  }`}
+                />
+                <span>{cat.name}</span>
+
+                {isActive && (
+                  <motion.div
+                    layoutId="categoryIndicator"
+                    className="absolute -bottom-1 left-2 right-2 h-1 rounded-full bg-white/80"
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+
+    </div>
   </div>
-</div>
 
 
 
 
       {/* Category Hero */}
-      <motion.section
-        key={activeCategory}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="relative h-[400px] md:h-[500px] flex items-center overflow-hidden"
-      >
-        <div className="absolute inset-0">
-          <img
-            src={currentContent.image}
-            alt={currentContent.title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
-        </div>
+<motion.section
+  key={activeCategory}
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.5 }}
+  className="relative h-[400px] md:h-[500px] flex items-center overflow-hidden"
+>
+  <div className="absolute inset-0">
+    <img
+      src={currentContent.image}
+      alt={currentContent.title}
+      className="w-full h-full object-cover"
+    />
+    <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50" />
+  </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl"
-          >
-            <p className="text-brand-red font-semibold text-lg mb-2 uppercase tracking-wide">
-              {currentContent.subtitle}
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              {currentContent.headline}
-            </h1>
-            <p className="text-lg text-gray-300 leading-relaxed">{currentContent.description}</p>
-          </motion.div>
-        </div>
-      </motion.section>
+  <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.2 }}
+      className="max-w-3xl mt-16 md:mt-24 lg:mt-32" // <-- added margin-top
+    >
+      <p className="text-brand-red font-semibold text-lg mb-2 uppercase tracking-wide">
+        {currentContent.subtitle}
+      </p>
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+        {currentContent.headline}
+      </h1>
+      <p className="text-lg text-gray-300 leading-relaxed">
+        {currentContent.description}
+      </p>
+    </motion.div>
+  </div>
+</motion.section>
+
       {/* Products Grid */}
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
