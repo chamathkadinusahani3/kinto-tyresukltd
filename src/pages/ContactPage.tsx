@@ -1,29 +1,44 @@
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-
-// ✅ Import hero image
 import heroImage from '../assets/contactus.png';
+
+const contactSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "KINTO TYRES UK LIMITED",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "132, Great North Road",
+      "addressLocality": "Hatfield",
+      "addressRegion": "Hertfordshire",
+      "postalCode": "AL9 5JN",
+      "addressCountry": "GB"
+    },
+    "telephone": ["+44-7886-686142", "+44-1707-912085"],
+    "email": "info@kinto-tyres.co.uk"
+  }
+};
 
 export function ContactPage() {
   const navigate = useNavigate();
-
   const [formState, setFormState] = useState({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
-
   const [touched, setTouched] = useState({
     name: false,
     email: false,
     phone: false,
     message: false
   });
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
@@ -42,7 +57,7 @@ export function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '849064c5-e2ac-4294-89eb-8f5b0ec8f9eb',
+          access_key: '849064c5',
           subject: `New Contact Message from ${formState.name}`,
           from_name: 'Kinto Tyres Website',
           replyto: formState.email,
@@ -74,159 +89,175 @@ ${formState.message}
   };
 
   return (
-    <div className="bg-[#0A0A0A] min-h-screen">
+    <>
+      <Helmet>
+        <title>Contact KINTO TYRES UK - Get in Touch | Hatfield, Hertfordshire</title>
+        <meta name="description" content="Contact KINTO TYRES UK LIMITED in Hatfield, Hertfordshire. Call +44 7886 686142 or email info@kinto-tyres.co.uk. Open Monday-Saturday for your convenience." />
+        <meta name="keywords" content="contact kinto tyres, kinto uk contact, tyre enquiries, hatfield tyres, kinto customer service, tyre support uk" />
+        
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kinto-tyres.co.uk/contact" />
+        <meta property="og:title" content="Contact KINTO TYRES UK" />
+        <meta property="og:description" content="Get in touch with KINTO TYRES UK. Located in Hatfield, Hertfordshire." />
+        
+        <link rel="canonical" href="https://kinto-tyres.co.uk/contact" />
+        
+        <script type="application/ld+json">
+          {JSON.stringify(contactSchema)}
+        </script>
+      </Helmet>
 
-      {/* ================= HERO SECTION ================= */}
-      <div className="relative h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden">
-        <img
-          src={heroImage}
-          alt="Contact Hero"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 text-center px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl md:text-5xl font-bold text-white"
-          >
-            Contact Us
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-gray-300 mt-4 text-lg md:text-xl"
-          >
-            Have questions about our products or need support? We’re here to help.
-          </motion.p>
+      <div className="bg-[#0A0A0A] min-h-screen">
+        <div className="relative h-[300px] md:h-[400px] flex items-center justify-center overflow-hidden">
+          <img
+            src={heroImage}
+            alt="Contact KINTO TYRES UK"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60" />
+          <div className="relative z-10 text-center px-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-4xl md:text-5xl font-bold text-white"
+            >
+              Contact Us
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="text-gray-300 mt-4 text-lg md:text-xl"
+            >
+              Have questions about our products or need support? We're here to help.
+            </motion.p>
+          </div>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-
-          {/* CONTACT FORM */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-glow p-8 md:p-12"
-          >
-            <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {['name', 'email', 'phone'].map((field) => (
-                <div key={field}>
-                  <label className="block text-gray-400 mb-1 capitalize">
-                    {field} <span className="text-red-500">*</span>
+        <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-glow p-8 md:p-12"
+            >
+              <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {['name', 'email', 'phone'].map((field) => (
+                  <div key={field}>
+                    <label className="block text-gray-400 mb-1 capitalize">
+                      {field} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type={field === 'email' ? 'email' : 'text'}
+                      name={field}
+                      value={formState[field as keyof typeof formState]}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white"
+                      aria-label={field}
+                    />
+                    {touched[field as keyof typeof touched] &&
+                      !formState[field as keyof typeof formState] && (
+                        <p className="text-red-500 text-sm mt-1">
+                          This field is required
+                        </p>
+                      )}
+                  </div>
+                ))}
+                <div>
+                  <label className="block text-gray-400 mb-1">
+                    Message <span className="text-red-500">*</span>
                   </label>
-                  <input
-                    type={field === 'email' ? 'email' : 'text'}
-                    name={field}
-                    value={formState[field as keyof typeof formState]}
+                  <textarea
+                    rows={5}
+                    name="message"
+                    value={formState.message}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white"
+                    aria-label="Message"
                   />
-                  {touched[field as keyof typeof touched] &&
-                    !formState[field as keyof typeof formState] && (
-                      <p className="text-red-500 text-sm mt-1">
-                        This field is required
-                      </p>
-                    )}
+                  {touched.message && !formState.message && (
+                    <p className="text-red-500 text-sm mt-1">Message is required</p>
+                  )}
                 </div>
-              ))}
+                <Button type="submit" fullWidth className="py-4 text-lg" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                </Button>
+              </form>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-10"
+            >
               <div>
-                <label className="block text-gray-400 mb-1">
-                  Message <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  rows={5}
-                  name="message"
-                  value={formState.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white"
-                />
-                {touched.message && !formState.message && (
-                  <p className="text-red-500 text-sm mt-1">Message is required</p>
+                <h2 className="text-2xl font-bold text-white mb-6">Head Office</h2>
+                <div className="space-y-6">
+                  <Info icon={<MapPin />} title="Address">
+                    132, Great North Road<br />Hatfield, Hertfordshire<br />United Kingdom AL9 5JN
+                  </Info>
+                  <Info icon={<Phone />} title="Phone">
+                    <a href="tel:+447886686142" className="hover:text-brand-red transition-colors">+44 7886 686142</a><br />
+                    <a href="tel:+441707912085" className="hover:text-brand-red transition-colors">+44 1707 912085</a>
+                  </Info>
+                  <Info icon={<Mail />} title="Email">
+                    <a href="mailto:info@kinto-tyres.co.uk" className="hover:text-brand-red transition-colors">
+                      info@kinto-tyres.co.uk
+                    </a>
+                  </Info>
+                  <Info icon={<Clock />} title="Business Hours">
+                    Mon–Fri: 9:00 AM – 6:00 PM<br />
+                    Sat: 10:00 AM – 4:00 PM<br />
+                    Sun: Closed
+                  </Info>
+                </div>
+              </div>
+
+              <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-8 rounded-2xl shadow-glow">
+                <h3 className="text-xl font-bold mb-4 text-white">Become a Dealer</h3>
+                <p className="text-gray-400 mb-6">
+                  Join our dealer network and grow your business.
+                </p>
+                <Button
+                  variant="outline"
+                  onClick={() => navigate('/dealer-registration')}
+                  className="w-full"
+                >
+                  Apply Now
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          {submitStatus !== 'idle' && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div className="bg-[#1A1A1A] p-8 rounded-xl text-center border border-[#333]">
+                {submitStatus === 'success' ? (
+                  <p className="text-green-500 text-lg font-semibold">
+                    ✅ Message sent successfully!
+                  </p>
+                ) : (
+                  <p className="text-red-500 text-lg font-semibold">
+                    ❌ Something went wrong. Try again.
+                  </p>
                 )}
               </div>
-              <Button type="submit" fullWidth className="py-4 text-lg" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-            </form>
-          </motion.div>
-
-          {/* RIGHT INFO */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-10"
-          >
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-6">Head Office</h2>
-              <div className="space-y-6">
-                <Info icon={<MapPin />} title="Address">
-                  132, Great North Road<br />Hatfield, Hertfordshire<br />United Kingdom AL9 5JN
-                </Info>
-                <Info icon={<Phone />} title="Phone">
-                  +44 7886 686142<br />+44 1707 912085
-                </Info>
-                <Info icon={<Mail />} title="Email">
-                  info@kinto-tyres.co.uk
-                </Info>
-                <Info icon={<Clock />} title="Business Hours">
-                  Mon–Fri: 9:00 AM – 6:00 PM<br />
-                  Sat: 10:00 AM – 4:00 PM<br />
-                  Sun: Closed
-                </Info>
-              </div>
-            </div>
-
-            {/* Dealer CTA */}
-            <div className="bg-[#1A1A1A] border border-[#2A2A2A] p-8 rounded-2xl shadow-glow">
-              <h3 className="text-xl font-bold mb-4 text-white">Become a Dealer</h3>
-              <p className="text-gray-400 mb-6">
-                Join our dealer network and grow your business.
-              </p>
-              <Button
-                variant="outline"
-                onClick={() => navigate('/dealer-registration')}
-                className="w-full"
-              >
-                Apply Now
-              </Button>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-
-      {/* SUCCESS / ERROR MODAL */}
-      <AnimatePresence>
-        {submitStatus !== 'idle' && (
-          <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div className="bg-[#1A1A1A] p-8 rounded-xl text-center border border-[#333]">
-              {submitStatus === 'success' ? (
-                <p className="text-green-500 text-lg font-semibold">
-                  ✅ Message sent successfully!
-                </p>
-              ) : (
-                <p className="text-red-500 text-lg font-semibold">
-                  ❌ Something went wrong. Try again.
-                </p>
-              )}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    </>
   );
 }
 
@@ -238,7 +269,7 @@ function Info({ icon, title, children }: any) {
       </div>
       <div>
         <h3 className="text-white font-semibold mb-1">{title}</h3>
-        <p className="text-gray-400">{children}</p>
+        <div className="text-gray-400">{children}</div>
       </div>
     </div>
   );

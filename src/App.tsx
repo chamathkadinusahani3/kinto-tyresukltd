@@ -1,5 +1,7 @@
+// src/App.tsx - Updated with SEO
 import React, { useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { TyreSearchHero } from './components/TyreSearchHero';
@@ -25,31 +27,29 @@ function ScrollToTop() {
 
 export const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="flex flex-col min-h-screen font-sans text-white bg-[#0A0A0A]">
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} />
-            <Route path="/search" element={<TyreSearchHero />} />
-            <Route path="/news" element={<NewsPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/warranty" element={<WarrantyPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/dealers" element={<DealersPage />} />
-            <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
-            <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="flex flex-col min-h-screen font-sans text-white bg-[#0A0A0A]">
+          <Header />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/products/:id" element={<ProductDetailPage />} />
+              <Route path="/search" element={<TyreSearchHero />} />
+              <Route path="/news" element={<NewsPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/warranty" element={<WarrantyPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/dealers" element={<DealersPage />} />
+              <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
+              <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 };
-
-
-
-
