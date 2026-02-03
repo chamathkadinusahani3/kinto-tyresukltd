@@ -2,8 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from "../assets/KINTOUKLOGO.png";
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from 'lucide-react';
+
 export function Footer() {
-  return <footer className="bg-[#000000] pt-16 pb-8 border-t border-[#2A2A2A]">
+  const handleCookieSettings = () => {
+    // Trigger cookie settings modal
+    window.dispatchEvent(new CustomEvent('open-cookie-settings'));
+  };
+
+  return (
+    <footer className="bg-[#000000] pt-16 pb-8 border-t border-[#2A2A2A]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
@@ -18,16 +25,40 @@ export function Footer() {
               under Japanese engineering for over 50 years.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="text-gray-500 hover:text-brand-red transition-colors" aria-label="Facebook">
+              <a 
+                href="https://facebook.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-brand-red transition-colors" 
+                aria-label="Facebook"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-500 hover:text-brand-red transition-colors" aria-label="Twitter">
+              <a 
+                href="https://twitter.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-brand-red transition-colors" 
+                aria-label="Twitter"
+              >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-500 hover:text-brand-red transition-colors" aria-label="Instagram">
+              <a 
+                href="https://instagram.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-brand-red transition-colors" 
+                aria-label="Instagram"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-500 hover:text-brand-red transition-colors" aria-label="LinkedIn">
+              <a 
+                href="https://linkedin.com" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-brand-red transition-colors" 
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -64,6 +95,11 @@ export function Footer() {
                   Contact Us
                 </Link>
               </li>
+              <li>
+                <Link to="/dealer-registration" className="text-gray-400 hover:text-brand-red text-large transition-colors">
+                  Become a Dealer
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -82,7 +118,7 @@ export function Footer() {
                   <p className="text-gray-400 text-large leading-relaxed">
                     132, Great North Road 
                     <br />
-                    Hatfield , Hertfordshire,
+                    Hatfield, Hertfordshire,
                     <br />
                     United Kingdom AL9 5JN
                   </p>
@@ -100,20 +136,17 @@ export function Footer() {
               <li className="flex items-start">
                 <Phone className="w-4 h-4 text-brand-red mr-2 mt-0.5 flex-shrink-0" />
                 <div className="text-large">
-                  <a href="tel:+81358886306" className="text-gray-400 hover:text-brand-red transition-colors block">
+                  <a href="tel:+447886686142" className="text-gray-400 hover:text-brand-red transition-colors block">
                     +44 7886 686142
                   </a>
-                  <a href="tel:+6621089312" className="text-gray-400 hover:text-brand-red transition-colors block mt-1">
+                  <a href="tel:+441707912085" className="text-gray-400 hover:text-brand-red transition-colors block mt-1">
                     +44 1707 912085
                   </a>
-                  <span className="text-gray-500 text-large">
-                
-                  </span>
                 </div>
               </li>
               <li className="flex items-start">
                 <Mail className="w-4 h-4 text-brand-red mr-2 mt-0.5 flex-shrink-0" />
-                <a href="mailto:info@kinto-tyres.com" className="text-gray-400 hover:text-brand-red text-large transition-colors">
+                <a href="mailto:info@kinto-tyres.co.uk" className="text-gray-400 hover:text-brand-red text-large transition-colors">
                   info@kinto-tyres.co.uk 
                 </a>
               </li>
@@ -127,18 +160,28 @@ export function Footer() {
               2025 ©KINTO TYRE UK LTD. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-xs text-gray-600">
-              <Link to="/privacy" className="hover:text-gray-400 transition-colors">
+              <Link to="/privacy-policy" className="hover:text-gray-400 transition-colors">
                 Privacy Policy
               </Link>
               <span>•</span>
-              <Link to="/terms" className="hover:text-gray-400 transition-colors">
-                Terms of Service
+              <Link to="/cookie-policy" className="hover:text-gray-400 transition-colors">
+                Cookie Policy
               </Link>
               <span>•</span>
-              
+              <Link to="/terms-and-conditions" className="hover:text-gray-400 transition-colors">
+                Terms & Conditions
+              </Link>
+              <span>•</span>
+              <button 
+                onClick={handleCookieSettings}
+                className="hover:text-gray-400 transition-colors"
+              >
+                Cookie Settings
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 }

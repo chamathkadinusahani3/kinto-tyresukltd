@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, AlertCircle, CheckCircle, X } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,7 +43,13 @@ export function ContactPage() {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const fieldName = e.target.name as keyof typeof touched;
     setFormState({ ...formState, [e.target.name]: e.target.value });
+    
+    // Clear error when user starts typing
+    if (touched[fieldName]) {
+      setTouched({ ...touched, [fieldName]: false });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -52,12 +58,14 @@ export function ContactPage() {
     if (!formState.name || !formState.email || !formState.phone || !formState.message) return;
 
     setIsSubmitting(true);
+    setSubmitStatus('idle');
+    
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '849064c5',
+          access_key: '849064c5-e2ac-4294-89eb-8f5b0ec8f9eb',
           subject: `New Contact Message from ${formState.name}`,
           from_name: 'Kinto Tyres Website',
           replyto: formState.email,
@@ -76,8 +84,9 @@ ${formState.message}
         setSubmitStatus('success');
         setTimeout(() => {
           setFormState({ name: '', email: '', phone: '', message: '' });
+          setTouched({ name: false, email: false, phone: false, message: false });
           setSubmitStatus('idle');
-        }, 3000);
+        }, 4000);
       } else {
         setSubmitStatus('error');
       }
@@ -86,6 +95,55 @@ ${formState.message}
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const renderInput = (
+    field: keyof typeof formState,
+    label: string,
+    type: string = 'text'
+  ) => {
+    const hasError = touched[field] && !formState[field];
+    
+    return (
+      <div>
+        <label className="block text-gray-400 mb-2 capitalize">
+          {label} <span className="text-red-500">*</span>
+        </label>
+        {type === 'textarea' ? (
+          <textarea
+            rows={5}
+            name={field}
+            value={formState[field]}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border ${
+              hasError ? 'border-red-500' : 'border-[#333]'
+            } text-white focus:ring-2 focus:ring-brand-red outline-none transition-all`}
+            aria-label={label}
+          />
+        ) : (
+          <input
+            type={type}
+            name={field}
+            value={formState[field]}
+            onChange={handleChange}
+            className={`w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border ${
+              hasError ? 'border-red-500' : 'border-[#333]'
+            } text-white focus:ring-2 focus:ring-brand-red outline-none transition-all`}
+            aria-label={label}
+          />
+        )}
+        {hasError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-2 text-red-500 text-sm mt-2 bg-red-500/10 px-3 py-2 rounded-lg border border-red-500/20"
+          >
+            <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <span>This field is required</span>
+          </motion.div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -145,44 +203,12 @@ ${formState.message}
             >
               <h2 className="text-2xl font-bold text-white mb-6">Send us a message</h2>
               <form onSubmit={handleSubmit} className="space-y-6">
-                {['name', 'email', 'phone'].map((field) => (
-                  <div key={field}>
-                    <label className="block text-gray-400 mb-1 capitalize">
-                      {field} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type={field === 'email' ? 'email' : 'text'}
-                      name={field}
-                      value={formState[field as keyof typeof formState]}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white"
-                      aria-label={field}
-                    />
-                    {touched[field as keyof typeof touched] &&
-                      !formState[field as keyof typeof formState] && (
-                        <p className="text-red-500 text-sm mt-1">
-                          This field is required
-                        </p>
-                      )}
-                  </div>
-                ))}
-                <div>
-                  <label className="block text-gray-400 mb-1">
-                    Message <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    rows={5}
-                    name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white"
-                    aria-label="Message"
-                  />
-                  {touched.message && !formState.message && (
-                    <p className="text-red-500 text-sm mt-1">Message is required</p>
-                  )}
-                </div>
-                <Button type="submit" fullWidth className="py-4 text-lg" disabled={isSubmitting}>
+                {renderInput('name', 'Name')}
+                {renderInput('email', 'Email', 'email')}
+                {renderInput('phone', 'Phone')}
+                {renderInput('message', 'Message', 'textarea')}
+                
+                <Button type="submit" fullWidth className="py-4 text-lg mt-6" disabled={isSubmitting}>
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </Button>
               </form>
@@ -234,25 +260,59 @@ ${formState.message}
           </div>
         </div>
 
+        {/* Success/Error Modal */}
         <AnimatePresence>
           {submitStatus !== 'idle' && (
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+              onClick={() => setSubmitStatus('idle')}
             >
-              <div className="bg-[#1A1A1A] p-8 rounded-xl text-center border border-[#333]">
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                transition={{ type: 'spring', duration: 0.5 }}
+                className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 md:p-10 text-center max-w-md w-full shadow-2xl relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setSubmitStatus('idle')}
+                  className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+
                 {submitStatus === 'success' ? (
-                  <p className="text-green-500 text-lg font-semibold">
-                    ✅ Message sent successfully!
-                  </p>
+                  <>
+                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <CheckCircle className="w-10 h-10 text-green-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-3">Request Confirmed!</h3>
+                    <p className="text-gray-300 mb-2">
+                      Your message has been sent successfully.
+                    </p>
+                    <p className="text-gray-400 text-sm">
+                      One of our call center operators will contact you shortly. Thank you!
+                    </p>
+                  </>
                 ) : (
-                  <p className="text-red-500 text-lg font-semibold">
-                    ❌ Something went wrong. Try again.
-                  </p>
+                  <>
+                    <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <AlertCircle className="w-10 h-10 text-red-500" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white mb-3">Submission Failed</h3>
+                    <p className="text-gray-300 mb-4">
+                      Something went wrong. Please try again later.
+                    </p>
+                    <Button onClick={() => setSubmitStatus('idle')} variant="outline">
+                      Close
+                    </Button>
+                  </>
                 )}
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

@@ -13,8 +13,13 @@ import { AboutPage } from './pages/AboutPage';
 import { WarrantyPage } from './pages/WarrantyPage';
 import { ContactPage } from './pages/ContactPage';
 import { DealerRegistrationPage } from './pages/DealerRegistrationPage';
+import { DistributorRegistrationPage } from './pages/DistributorRegistrationPage';
 import { WarrantyRegistrationForm } from './components/warrantyregistration';
 import { DealersPage } from './pages/DealersPage';
+import { PrivacyPolicyPage } from './pages/PrivacyPolicyPage';
+import { CookiePolicyPage } from './pages/CookiePolicyPage';
+import { TermsAndConditionsPage } from './pages/TermsAndConditionsPage';
+import { CookieBanner } from './components/CookieBanner';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -44,10 +49,15 @@ export const App: React.FC = () => {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/dealers" element={<DealersPage />} />
               <Route path="/dealer-registration" element={<DealerRegistrationPage />} />
+              <Route path="/distributor-registration" element={<DistributorRegistrationPage />} />
               <Route path="/warrantyregistration" element={<WarrantyRegistrationForm />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+              <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+              <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
             </Routes>
           </main>
           <Footer />
+             <CookieBanner />
         </div>
       </Router>
     </HelmetProvider>

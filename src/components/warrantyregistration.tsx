@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, X } from 'lucide-react';
 import { Button } from '../components/ui/Button';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface WarrantyFormData {
   firstName: string;
@@ -42,6 +42,7 @@ export function WarrantyRegistrationForm() {
 
   const [errors, setErrors] = useState<{ [key in keyof WarrantyFormData]?: string }>({});
   const [loading, setLoading] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type, checked, files } = e.target as HTMLInputElement;
@@ -49,6 +50,10 @@ export function WarrantyRegistrationForm() {
       ...prev,
       [name]: type === 'checkbox' ? checked : type === 'file' ? files?.[0] || null : value
     }));
+    // Clear error for this field when user starts typing
+    if (errors[name as keyof WarrantyFormData]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
   };
 
   const validate = (): boolean => {
@@ -93,6 +98,7 @@ export function WarrantyRegistrationForm() {
     if (!validate()) return;
 
     setLoading(true);
+    setSubmitStatus('idle');
 
     try {
       let invoiceURL = "";
@@ -122,31 +128,34 @@ export function WarrantyRegistrationForm() {
 
       const result = await response.json();
       if (result.success) {
-        alert("Warranty registered successfully!");
-        setFormData({
-          firstName: '',
-          surname: '',
-          address: '',
-          city: '',
-          mobilePhone: '',
-          dealerShop: '',
-          dateOfPurchase: '',
-          tyrePattern: '',
-          tyreSize: '',
-          tyreCount: '1',
-          dotNumber: '',
-          currentMileage: '',
-          vehicleNo: '',
-          invoiceImage: null,
-          acceptedPolicy: false
-        });
-        setErrors({});
+        setSubmitStatus('success');
+        setTimeout(() => {
+          setFormData({
+            firstName: '',
+            surname: '',
+            address: '',
+            city: '',
+            mobilePhone: '',
+            dealerShop: '',
+            dateOfPurchase: '',
+            tyrePattern: '',
+            tyreSize: '',
+            tyreCount: '1',
+            dotNumber: '',
+            currentMileage: '',
+            vehicleNo: '',
+            invoiceImage: null,
+            acceptedPolicy: false
+          });
+          setErrors({});
+          setSubmitStatus('idle');
+        }, 4000);
       } else {
-        alert("Something went wrong. Please try again.");
+        setSubmitStatus('error');
       }
     } catch (error) {
       console.error(error);
-      alert("Submission failed. Please try again later.");
+      setSubmitStatus('error');
     }
 
     setLoading(false);
@@ -154,9 +163,14 @@ export function WarrantyRegistrationForm() {
 
   const renderError = (field: keyof WarrantyFormData) =>
     errors[field] ? (
-      <div className="flex items-center text-red-500 text-sm mt-1">
-        <AlertCircle className="w-4 h-4 mr-1" /> {errors[field]}
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center gap-2 text-red-500 text-sm mt-2 bg-red-500/10 px-3 py-2 rounded-lg border border-red-500/20"
+      >
+        <AlertCircle className="w-4 h-4 flex-shrink-0" />
+        <span>{errors[field]}</span>
+      </motion.div>
     ) : null;
 
   return (
@@ -182,10 +196,16 @@ export function WarrantyRegistrationForm() {
           if (key === "invoiceImage") {
             return (
               <div key={key}>
-                <label className="block text-gray-400 mb-1">
+                <label className="block text-gray-400 mb-2">
                   Attach Invoice Image <span className="text-red-500">*</span>
                 </label>
-                <input type="file" accept="image/*" name={key} onChange={handleChange} className="w-full text-gray-300" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  name={key}
+                  onChange={handleChange}
+                  className="w-full text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-red file:text-white hover:file:bg-brand-red/90 file:cursor-pointer"
+                />
                 {renderError(key as keyof WarrantyFormData)}
               </div>
             );
@@ -193,11 +213,20 @@ export function WarrantyRegistrationForm() {
 
           if (key === "acceptedPolicy") {
             return (
-              <div key={key} className="flex items-center gap-2 mt-2">
-                <input type="checkbox" name={key} checked={formData.acceptedPolicy} onChange={handleChange} />
-                <span className="text-gray-400 text-sm">
-                  I agree to Privacy Policy and Terms and Conditions <span className="text-red-500">*</span>
-                </span>
+              <div key={key} className="space-y-2">
+                <div className="flex items-start gap-3 mt-4">
+                  <input
+                    type="checkbox"
+                    name={key}
+                    checked={formData.acceptedPolicy}
+                    onChange={handleChange}
+                    className="mt-1 w-4 h-4 accent-brand-red cursor-pointer"
+                    id="acceptedPolicy"
+                  />
+                  <label htmlFor="acceptedPolicy" className="text-gray-400 text-sm cursor-pointer">
+                    I agree to Privacy Policy and Terms and Conditions <span className="text-red-500">*</span>
+                  </label>
+                </div>
                 {renderError(key as keyof WarrantyFormData)}
               </div>
             );
@@ -207,19 +236,84 @@ export function WarrantyRegistrationForm() {
 
           return (
             <div key={key}>
-              <label className="block text-gray-400 mb-1">
+              <label className="block text-gray-400 mb-2">
                 {key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())} <span className="text-red-500">*</span>
               </label>
-              <input type={type} name={key} value={value as string} onChange={handleChange} className="w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border border-[#333] text-white" />
+              <input
+                type={type}
+                name={key}
+                value={value as string}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 rounded-lg bg-[#0A0A0A] border ${
+                  errors[key as keyof WarrantyFormData] ? 'border-red-500' : 'border-[#333]'
+                } text-white focus:ring-2 focus:ring-brand-red outline-none transition-all`}
+              />
               {renderError(key as keyof WarrantyFormData)}
             </div>
           );
         })}
 
-        <Button type="submit" fullWidth className="py-4 text-lg mt-4" disabled={loading}>
+        <Button type="submit" fullWidth className="py-4 text-lg mt-6" disabled={loading}>
           {loading ? 'Submitting...' : 'Submit Warranty'}
         </Button>
       </motion.form>
+
+      {/* Success/Error Modal */}
+      <AnimatePresence>
+        {submitStatus !== 'idle' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setSubmitStatus('idle')}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', duration: 0.5 }}
+              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-8 md:p-10 text-center max-w-md w-full shadow-2xl relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSubmitStatus('idle')}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {submitStatus === 'success' ? (
+                <>
+                  <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-10 h-10 text-green-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-3">Request Confirmed!</h3>
+                  <p className="text-gray-300 mb-2">
+                    Your warranty registration has been received successfully.
+                  </p>
+                  <p className="text-gray-400 text-sm">
+                    One of our call center operators will contact you shortly. Thank you!
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <AlertCircle className="w-10 h-10 text-red-500" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-3">Submission Failed</h3>
+                  <p className="text-gray-300 mb-4">
+                    Something went wrong. Please try again later.
+                  </p>
+                  <Button onClick={() => setSubmitStatus('idle')} variant="outline">
+                    Close
+                  </Button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

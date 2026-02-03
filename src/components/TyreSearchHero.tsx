@@ -81,7 +81,9 @@ export function TyreSearchHero() {
           <p className="text-gray-400 text-lg">Search by tyre size</p>
         </motion.div>
 
+        {/* Search Inputs */}
         <motion.div
+          translate="no" // ← Prevent Google Translate from breaking the search
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -197,6 +199,7 @@ export function TyreSearchHero() {
             delay: 0.6,
           }}
           className="mt-16"
+          translate="yes"
         >
           <div className="bg-gradient-to-b from-[#1A1A1A] to-[#0F0F0F] rounded-2xl border border-[#2A2A2A] overflow-hidden shadow-2xl">
             <div className="p-6 md:p-8">

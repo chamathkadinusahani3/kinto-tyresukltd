@@ -389,6 +389,46 @@ export function HomePage() {
           </div>
         </section>
 
+
+       {/* Become Dealer + Distributor Section */}
+<div className="flex flex-col lg:flex-row gap-6 my-8 mx-4 sm:mx-6 lg:mx-8">
+  {/* Become a Dealer */}
+  <div className="flex-1 bg-[#c80000] text-white rounded-xl shadow-lg p-12 text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      BECOME A DEALER <span className="block ">Join our dealer network</span>
+    </h2>
+    <p className="mb-6 text-lg md:text-xl text-black">
+      Join our dealer network and grow your business.
+    </p>
+    <Button
+      as="a"
+      href="/dealer-registration" // Link to Dealer form page
+      className="bg-black text-[#ff0000] hover:bg-gray-900 hover:text-[#ff0000] px-6 py-3 rounded-lg font-semibold transition"
+    >
+      Apply Now
+    </Button>
+  </div>
+
+  {/* Become a Distributor */}
+  <div className="flex-1 bg-[#c80000] text-white rounded-xl shadow-lg p-12 text-center">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      BECOME A DISTRIBUTOR <span className="block">Join our global network</span>
+    </h2>
+    <p className="mb-6 text-lg md:text-xl text-black">
+      Apply now to become an authorized partner and distribute KINTO Tyres in your region.
+    </p>
+    <Button
+      as="a"
+      href="/distributor-registration" // Link to Distributor form page
+      className="bg-black text-[#ff0000] hover:bg-gray-900 hover:text-[#ff0000] px-6 py-3 rounded-lg font-semibold transition"
+    >
+      Apply Now
+    </Button>
+  </div>
+</div> 
+
+    
+
         {/* Dealer Search Section */}
         <section className="py-8 md:py-12 bg-[#0A0A0A]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -432,6 +472,9 @@ export function HomePage() {
             </div>
           </div>
         </section>
+
+
+
 
         {/* Why KINTO Tyres */}
         <section className="py-16 md:py-24 bg-[#111111]">
@@ -505,6 +548,9 @@ export function HomePage() {
             </div>
           </div>
         </section>
+
+
+
 
         {/* News Section */}
         <section className="py-16 md:py-24 bg-[#0A0A0A]">
