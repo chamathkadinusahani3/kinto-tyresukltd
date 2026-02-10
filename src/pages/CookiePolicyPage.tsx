@@ -38,7 +38,7 @@ export function CookiePolicyPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-gray-400 text-lg"
             >
-              Last Updated: January 30, 2026
+              Last Updated: 10 February 2026
             </motion.p>
           </div>
         </div>
@@ -54,68 +54,71 @@ export function CookiePolicyPage() {
             {/* Introduction */}
             <Section
               icon={<Cookie className="w-6 h-6" />}
+              title="Introduction"
+              content={
+                <p>
+                  This Cookie Policy explains how KINTO TYRES UK LIMITED uses cookies and similar technologies when you visit our website. 
+                  This policy should be read alongside our <a href="/privacy-policy" className="text-brand-red hover:underline">Privacy Policy</a>.
+                </p>
+              }
+            />
+
+            {/* What Are Cookies */}
+            <Section
+              icon={<Settings className="w-6 h-6" />}
               title="What Are Cookies?"
               content={
                 <p>
-                  Cookies are small text files that are placed on your device when you visit our website. They help us provide you with a better experience by remembering your preferences, analyzing how you use our site, and enabling certain features.
+                  Cookies are small text files placed on your device to ensure proper website functioning, improve performance, and provide personalized content and advertising.
                 </p>
+              }
+            />
+
+            {/* Legal Basis */}
+            <Section
+              title="Legal Basis for Using Cookies"
+              content={
+                <ul className="list-disc list-inside ml-4 space-y-2">
+                  <li><strong>Strictly Necessary Cookies:</strong> Based on our legitimate interest to operate the website.</li>
+                  <li><strong>Analytics, Functional, and Advertising Cookies:</strong> Used only with your consent. Disabled by default and activated only after you accept them via our cookie banner.</li>
+                </ul>
               }
             />
 
             {/* Types of Cookies */}
             <Section
-              icon={<Settings className="w-6 h-6" />}
               title="Types of Cookies We Use"
               content={
                 <div className="space-y-6">
                   <CookieType
-                    title="1. Strictly Necessary Cookies"
-                    description="These cookies are essential for the website to function properly. They enable core functionality such as security, network management, and accessibility."
-                    examples={[
-                      'Session management',
-                      'Security authentication',
-                      'Load balancing'
-                    ]}
+                    title="Strictly Necessary Cookies (Always Active)"
+                    description="Essential for security, session management, and accessibility."
+                    examples={['Session management', 'Security authentication', 'Load balancing']}
                     required={true}
                   />
-
                   <CookieType
-                    title="2. Performance Cookies"
-                    description="These cookies collect information about how visitors use our website, such as which pages are visited most often. This data helps us improve our website's performance."
-                    examples={[
-                      'Google Analytics',
-                      'Page load times',
-                      'Error tracking'
-                    ]}
+                    title="Performance / Analytics Cookies (Consent Required)"
+                    description="Used to understand how visitors use our website."
+                    examples={['Google Analytics']}
                     required={false}
                   />
-
                   <CookieType
-                    title="3. Functionality Cookies"
-                    description="These cookies allow our website to remember choices you make (such as language preferences) and provide enhanced, personalized features."
-                    examples={[
-                      'Language preferences',
-                      'Region selection',
-                      'User interface customization'
-                    ]}
+                    title="Functionality Cookies (Consent Required)"
+                    description="Remember user preferences and enhance user experience."
+                    examples={['Language preference', 'Region selection', 'UI customization']}
                     required={false}
                   />
-
                   <CookieType
-                    title="4. Targeting/Advertising Cookies"
-                    description="These cookies are used to deliver advertisements that are relevant to you. They also limit the number of times you see an advertisement and help measure the effectiveness of advertising campaigns."
-                    examples={[
-                      'Google Ads',
-                      'Facebook Pixel',
-                      'Remarketing tags'
-                    ]}
+                    title="Targeting / Advertising Cookies (Consent Required)"
+                    description="Deliver relevant ads and measure campaign effectiveness."
+                    examples={['Google Ads', 'Facebook Pixel']}
                     required={false}
                   />
                 </div>
               }
             />
 
-            {/* Cookie Table */}
+            {/* Specific Cookies */}
             <Section
               icon={<BarChart className="w-6 h-6" />}
               title="Specific Cookies We Use"
@@ -131,60 +134,32 @@ export function CookiePolicyPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      <CookieRow
-                        name="_session"
-                        type="Necessary"
-                        duration="Session"
-                        purpose="Maintains user session state"
-                      />
-                      <CookieRow
-                        name="cookie_consent"
-                        type="Necessary"
-                        duration="1 year"
-                        purpose="Stores cookie consent preferences"
-                      />
-                      <CookieRow
-                        name="_ga"
-                        type="Analytics"
-                        duration="2 years"
-                        purpose="Google Analytics - distinguishes users"
-                      />
-                      <CookieRow
-                        name="_gid"
-                        type="Analytics"
-                        duration="24 hours"
-                        purpose="Google Analytics - distinguishes users"
-                      />
-                      <CookieRow
-                        name="language"
-                        type="Functional"
-                        duration="1 year"
-                        purpose="Remembers language preference"
-                      />
+                      <CookieRow name="_session" type="Necessary" duration="Session" purpose="Maintains session state" />
+                      <CookieRow name="cookie_consent" type="Necessary" duration="1 year" purpose="Stores consent preferences" />
+                      <CookieRow name="_ga" type="Analytics" duration="2 years" purpose="Distinguishes users (Google Analytics)" />
+                      <CookieRow name="_gid" type="Analytics" duration="24 hours" purpose="Distinguishes users (Google Analytics)" />
+                      <CookieRow name="language" type="Functional" duration="1 year" purpose="Language preference" />
                     </tbody>
                   </table>
                 </div>
               }
             />
 
-            {/* Third-Party Cookies */}
+            {/* Third Party */}
             <Section
               icon={<Target className="w-6 h-6" />}
-              title="Third-Party Cookies"
+              title="Third-Party Cookies & International Transfers"
               content={
                 <>
                   <p>
-                    We use services from third-party companies that may set cookies on your device:
+                    We use third-party services that may store or process data outside the UK, including the United States and EU. These include:
                   </p>
-                  <ul className="list-disc list-inside space-y-2 ml-4 mt-4">
-                    <li><strong>Google Analytics:</strong> Helps us understand how visitors use our website</li>
-                    <li><strong>Google Ads:</strong> Delivers relevant advertisements</li>
-                    <li><strong>Facebook Pixel:</strong> Tracks conversions from Facebook ads</li>
-                    <li><strong>Cloudinary:</strong> Hosts and optimizes images</li>
+                  <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
+                    <li>Google (Analytics & Ads)</li>
+                    <li>Meta (Facebook Pixel)</li>
+                    <li>Cloudinary (image hosting)</li>
                   </ul>
-                  <p className="mt-4">
-                    These third parties have their own privacy policies, and we have no control over their cookies.
-                  </p>
+                  <p className="mt-2">We ensure appropriate safeguards such as Standard Contractual Clauses are in place.</p>
                 </>
               }
             />
@@ -192,39 +167,21 @@ export function CookiePolicyPage() {
             {/* Managing Cookies */}
             <Section
               icon={<Shield className="w-6 h-6" />}
-              title="How to Manage Your Cookie Preferences"
+              title="Managing and Withdrawing Consent"
               content={
                 <>
-                  <p className="font-semibold mb-3">You can control cookies in several ways:</p>
-                  
-                  <div className="space-y-4">
-                    <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#333]">
-                      <h4 className="text-white font-semibold mb-2">1. Cookie Consent Banner</h4>
-                      <p>When you first visit our website, you can accept, reject, or customize your cookie preferences through our cookie banner.</p>
-                    </div>
-
-                    <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#333]">
-                      <h4 className="text-white font-semibold mb-2">2. Cookie Settings</h4>
-                      <p>You can change your cookie preferences at any time by clicking the "Cookie Settings" link in the footer of our website.</p>
-                    </div>
-
-                    <div className="bg-[#0A0A0A] p-4 rounded-lg border border-[#333]">
-                      <h4 className="text-white font-semibold mb-2">3. Browser Settings</h4>
-                      <p>Most browsers allow you to control cookies through their settings:</p>
-                      <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
-                        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">Google Chrome</a></li>
-                        <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">Mozilla Firefox</a></li>
-                        <li><a href="https://support.apple.com/guide/safari/manage-cookies-sfri11471/mac" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">Safari</a></li>
-                        <li><a href="https://support.microsoft.com/en-us/windows/microsoft-edge-browsing-data-and-privacy-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd" target="_blank" rel="noopener noreferrer" className="text-brand-red hover:underline">Microsoft Edge</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-                    <p className="text-yellow-200 text-sm">
-                      <strong>Note:</strong> Blocking or deleting cookies may impact your experience on our website. Some features may not work properly if you disable necessary cookies.
-                    </p>
-                  </div>
+                  <p>You can withdraw or change your cookie consent at any time by:</p>
+                  <ul className="list-disc list-inside ml-4 mt-2 space-y-1">
+                    <li>Clicking the “Cookie Settings” link in our website footer</li>
+                    <li>Adjusting your browser settings</li>
+                  </ul>
+                  <p className="mt-3 font-semibold">Browser controls:</p>
+                  <ul className="list-disc list-inside ml-4 mt-1 space-y-1">
+                    <li>Google Chrome</li>
+                    <li>Mozilla Firefox</li>
+                    <li>Safari</li>
+                    <li>Microsoft Edge</li>
+                  </ul>
                 </>
               }
             />
@@ -234,7 +191,7 @@ export function CookiePolicyPage() {
               title="Updates to This Policy"
               content={
                 <p>
-                  We may update this Cookie Policy from time to time to reflect changes in our practices or for legal reasons. We will post any changes on this page with an updated "Last Updated" date.
+                  We may update this policy from time to time. Changes will be posted with a new "Last Updated" date.
                 </p>
               }
             />
@@ -243,16 +200,13 @@ export function CookiePolicyPage() {
             <Section
               title="Contact Us"
               content={
-                <>
-                  <p>If you have questions about our use of cookies, please contact us:</p>
-                  <div className="mt-4 bg-[#0A0A0A] p-4 rounded-lg border border-[#333]">
-                    <p className="text-gray-300">
-                      <strong>Email:</strong> info@kinto-tyres.co.uk<br />
-                      <strong>Phone:</strong> +44 7886 686142<br />
-                      <strong>Address:</strong> 132, Great North Road, Hatfield, Hertfordshire, AL9 5JN, UK
-                    </p>
-                  </div>
-                </>
+                <div className="mt-4 bg-[#0A0A0A] p-4 rounded-lg border border-[#333]">
+                  <p className="text-gray-300">
+                    <strong>Email:</strong> info@kinto-tyres.co.uk<br />
+                    <strong>Phone:</strong> +44 7886 686142<br />
+                    <strong>Address:</strong> 132, Great North Road, Hatfield, Hertfordshire, AL9 5JN, UK
+                  </p>
+                </div>
               }
             />
           </motion.div>
@@ -262,12 +216,12 @@ export function CookiePolicyPage() {
   );
 }
 
+// Reusable Section Component
 interface SectionProps {
   icon?: React.ReactNode;
   title: string;
   content: React.ReactNode;
 }
-
 function Section({ icon, title, content }: SectionProps) {
   return (
     <div className="border-b border-[#2A2A2A] last:border-0 pb-8 last:pb-0">
@@ -279,28 +233,24 @@ function Section({ icon, title, content }: SectionProps) {
         )}
         <h2 className="text-2xl font-bold text-white flex-1">{title}</h2>
       </div>
-      <div className="text-gray-300 leading-relaxed space-y-3 ml-[52px]">
-        {content}
-      </div>
+      <div className="text-gray-300 leading-relaxed space-y-3 ml-[52px]">{content}</div>
     </div>
   );
 }
 
+// CookieType Component
 interface CookieTypeProps {
   title: string;
   description: string;
   examples: string[];
   required: boolean;
 }
-
 function CookieType({ title, description, examples, required }: CookieTypeProps) {
   return (
     <div className="bg-[#0A0A0A] p-5 rounded-lg border border-[#333]">
       <div className="flex items-start justify-between mb-3">
         <h4 className="text-white font-semibold text-lg">{title}</h4>
-        {required && (
-          <span className="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Required</span>
-        )}
+        {required && <span className="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded">Required</span>}
       </div>
       <p className="text-gray-400 mb-3">{description}</p>
       <div className="text-sm">
@@ -315,13 +265,13 @@ function CookieType({ title, description, examples, required }: CookieTypeProps)
   );
 }
 
+// CookieRow Component
 interface CookieRowProps {
   name: string;
   type: string;
   duration: string;
   purpose: string;
 }
-
 function CookieRow({ name, type, duration, purpose }: CookieRowProps) {
   return (
     <tr className="border-b border-[#2A2A2A] last:border-0">
