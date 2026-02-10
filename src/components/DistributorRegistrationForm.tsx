@@ -29,59 +29,37 @@ interface DistributorFormData {
   message: string;
 }
 
+const initialState: DistributorFormData = {
+  companyName: '',
+  registrationNumber: '',
+  yearEstablished: '',
+  website: '',
+  address: '',
+  country: '',
+  region: '',
+  contactName: '',
+  designation: '',
+  email: '',
+  phone: '',
+  businessType: '',
+  currentBrands: '',
+  containerVolume: '',
+  countriesCovered: '',
+  euCompliance: '',
+  euCertifiedOnly: '',
+  requirements: '',
+  message: ''
+};
+
 export const DistributorRegistrationForm: React.FC = () => {
-  const [formState, setFormState] = useState<DistributorFormData>({
-    companyName: '',
-    registrationNumber: '',
-    yearEstablished: '',
-    website: '',
-    address: '',
-    country: '',
-    region: '',
+  const [formState, setFormState] = useState<DistributorFormData>(initialState);
 
-    contactName: '',
-    designation: '',
-    email: '',
-    phone: '',
-
-    businessType: '',
-    currentBrands: '',
-    containerVolume: '',
-    countriesCovered: '',
-
-    euCompliance: '',
-    euCertifiedOnly: '',
-
-    requirements: '',
-    message: ''
-  });
-
-  // NEW: track which fields have been touched for validation
-  const [touched, setTouched] = useState<Record<keyof DistributorFormData, boolean>>({
-    companyName: false,
-    registrationNumber: false,
-    yearEstablished: false,
-    website: false,
-    address: false,
-    country: false,
-    region: false,
-
-    contactName: false,
-    designation: false,
-    email: false,
-    phone: false,
-
-    businessType: false,
-    currentBrands: false,
-    containerVolume: false,
-    countriesCovered: false,
-
-    euCompliance: false,
-    euCertifiedOnly: false,
-
-    requirements: false,
-    message: false
-  });
+  const [touched, setTouched] = useState<Record<keyof DistributorFormData, boolean>>(
+    Object.keys(initialState).reduce((acc, key) => {
+      acc[key as keyof DistributorFormData] = false;
+      return acc;
+    }, {} as Record<keyof DistributorFormData, boolean>)
+  );
 
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -91,22 +69,20 @@ export const DistributorRegistrationForm: React.FC = () => {
   ) => {
     const name = e.target.name as keyof DistributorFormData;
     setFormState({ ...formState, [name]: e.target.value });
-    if (touched[name]) {
-      setTouched({ ...touched, [name]: false });
-    }
+    if (touched[name]) setTouched({ ...touched, [name]: false });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // mark all fields as touched
+    // Mark all fields as touched for validation
     const newTouched = Object.keys(formState).reduce((acc, key) => {
       acc[key as keyof DistributorFormData] = true;
       return acc;
     }, {} as Record<keyof DistributorFormData, boolean>);
     setTouched(newTouched);
 
-    // check if any field is empty
+    // Check for empty fields
     const hasEmpty = Object.values(formState).some((v) => v.trim() === '');
     if (hasEmpty) return;
 
@@ -114,50 +90,41 @@ export const DistributorRegistrationForm: React.FC = () => {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '86546526549064c5',
-          subject: `New Distributor Application - ${formState.companyName}`,
-          from_name: 'Distributor Form',
-          replyto: formState.email,
-          message: JSON.stringify(formState, null, 2)
-        })
+      const formDataToSend = new FormData();
+      formDataToSend.append("access_key", "3fd2ddc1-ecad-4f31-88e5-457ec4e8ba68"); // <-- replace with your key
+      formDataToSend.append("subject", `New Distributor Application - ${formState.companyName}`);
+      formDataToSend.append("from_name", "Distributor Form");
+      formDataToSend.append("replyto", formState.email);
+
+      const formattedMessage = Object.entries(formState)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join("\n");
+      formDataToSend.append("message", formattedMessage);
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataToSend,
       });
 
       const result = await response.json();
-      setSubmitStatus(result.success ? 'success' : 'error');
+
       if (result.success) {
-        setFormState({
-          companyName: '',
-          registrationNumber: '',
-          yearEstablished: '',
-          website: '',
-          address: '',
-          country: '',
-          region: '',
+        setSubmitStatus('success');
+        setFormState(initialState); // Reset form
+        setTouched(Object.keys(initialState).reduce((acc, key) => {
+          acc[key as keyof DistributorFormData] = false;
+          return acc;
+        }, {} as Record<keyof DistributorFormData, boolean>));
 
-          contactName: '',
-          designation: '',
-          email: '',
-          phone: '',
-
-          businessType: '',
-          currentBrands: '',
-          containerVolume: '',
-          countriesCovered: '',
-
-          euCompliance: '',
-          euCertifiedOnly: '',
-
-          requirements: '',
-          message: ''
-        });
-        setTouched(Object.fromEntries(Object.keys(touched).map((k) => [k, false])) as any);
+        // Auto-hide modal after 4 seconds
+        setTimeout(() => setSubmitStatus('idle'), 4000);
+      } else {
+        setSubmitStatus('error');
+        setTimeout(() => setSubmitStatus('idle'), 4000);
       }
     } catch {
       setSubmitStatus('error');
+      setTimeout(() => setSubmitStatus('idle'), 4000);
     } finally {
       setIsSubmitting(false);
     }
@@ -252,14 +219,21 @@ export const DistributorRegistrationForm: React.FC = () => {
         {renderInput('website', 'Website')}
         {renderInput('address', 'Company Address', 'textarea')}
         {renderInput('country', 'Country')}
-        {renderSelect('region', 'Region', ['Europe', 'Middle East', 'Africa', 'Asia', 'Other'])}
+        {renderSelect('region', 'Region', ['Europe','Other'])}
 
         {renderInput('contactName', 'Contact Person Name')}
         {renderInput('designation', 'Designation')}
         {renderInput('email', 'Email', 'email')}
         {renderInput('phone', 'Phone', 'tel')}
 
-        {renderSelect('businessType', 'Business Type', ['Importer', 'Wholesaler', 'Distributor', 'Retail Chain'])}
+        {renderSelect('businessType', 'Business Type', [
+          'Sole Proprietorship',
+          'Partnership',
+          'Limited Liability Company (LLC)',
+          'Private Limited Company (Pvt Ltd)',
+          'Public Limited Company (PLC)',
+          'Other'
+        ])}
         {renderInput('currentBrands', 'Current Tyre Brands You Handle')}
         {renderSelect('containerVolume', 'Monthly Container Volume', ['1-2', '3-5', '5+'])}
         {renderInput('countriesCovered', 'Countries You Distribute To')}
@@ -275,10 +249,24 @@ export const DistributorRegistrationForm: React.FC = () => {
         </Button>
       </motion.form>
 
+      {/* Success/Error Modal */}
       <AnimatePresence>
         {submitStatus !== 'idle' && (
-          <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
-            <motion.div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-10 text-center max-w-md w-full">
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setSubmitStatus('idle')} // click outside closes modal
+          >
+            <motion.div
+              className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl p-10 text-center max-w-md w-full"
+              onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+            >
+              <button
+                onClick={() => setSubmitStatus('idle')}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
               {submitStatus === 'success' ? (
                 <>
                   <CheckCircle className="mx-auto text-green-500 w-12 h-12 mb-4" />

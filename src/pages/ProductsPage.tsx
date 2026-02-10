@@ -17,6 +17,7 @@ import passenger from "../assets/passenger.png";
 import lighttruck from "../assets/lighttruck.png";
 import truckbus from "../assets/truckbus.png";
 import offroad from "../assets/offroad.png";
+import evtyres from "../assets/ev.png";
 import FORZA001 from "../assets/products/passenger/FORZA001.png";
 import FALCOS88 from "../assets/products/passenger/FALCOS88.png";
 import V36 from "../assets/products/passenger/V36.png";
@@ -66,8 +67,15 @@ import R1MIN3 from "../assets/products/offroad/R1MIN3.png";
 import R1MIN4 from "../assets/products/offroad/R1MIN4.png";
 import R1MIN5 from "../assets/products/offroad/R1MIN5.png";
 import PR1 from "../assets/products/offroad/PR1.png";
+import PRESTIGEP07 from "../assets/products/evtyres/PRESTIGEP07.png";
 
-type Category = 'passenger' | 'light-truck' | 'truck-bus' | 'off-road';
+
+type Category =
+  | 'passenger'
+  | 'light-truck'
+  | 'truck-bus'
+  | 'off-road'
+  | 'ev-tyres';
 
 const container = {
   hidden: { opacity: 0 },
@@ -87,7 +95,8 @@ export function ProductsPage() {
     { id: 'passenger' as Category, name: 'Passenger Car', icon: Car },
     { id: 'light-truck' as Category, name: 'Light Truck', icon: Truck },
     { id: 'truck-bus' as Category, name: 'Truck & Bus', icon: Bus },
-    { id: 'off-road' as Category, name: 'Off The Road', icon: Mountain }
+    { id: 'off-road' as Category, name: 'Off The Road', icon: Mountain },
+    { id: 'ev-tyres' as Category, name: 'EV Tyres', icon: Car }
   ];
 
   const passengerProducts = [
@@ -399,6 +408,17 @@ export function ProductsPage() {
     }
   ];
 
+  const evProducts = [
+    {
+      id: 'PRESTIGEP07',
+      name: 'PRESTIGE P07',
+      tagline: 'Luxury performance with a dramatic silence',
+      image: PRESTIGEP07,
+    }
+  ];
+
+ 
+
   const categoryContent = {
     passenger: {
       title: 'Passenger Car',
@@ -435,7 +455,16 @@ export function ProductsPage() {
         'Loader, Grader, Dump Truck, Industrial Machinery, Reachstacker, Empty Container Handler, Heavy Forklift, Tractor, Forestry Machinery, Harvester, Sprayer, Farm Implement, Trailer, Spreader, Grain Cart, Soil Preparation & Irrigation Equipment',
       products: offRoadProducts,
       image:offroad,
-    }
+    },
+    'ev-tyres': {
+  title: 'Electric Vehicle Tyres',
+  subtitle: 'Future of Mobility',
+  headline: 'Engineered for Electric Performance, Silence and Efficiency',
+  description:
+    'EV tyres handle higher loads, instant torque, low rolling resistance, and ultra-low noise for electric vehicles—delivering longer range, smoother rides, and better grip with KINTO EV-ready technology.',
+  products: evProducts,
+  image:evtyres, 
+  }
   };
 
   const currentContent = categoryContent[activeCategory];

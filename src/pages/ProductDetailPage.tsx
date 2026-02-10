@@ -154,6 +154,45 @@ function OffRoadTable({ sizes }: { sizes: any[] }) {
   );
 }
 
+function EVTable({ sizes }: { sizes: any[] }) {
+  return (
+    <div className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-lg overflow-hidden">
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead className="bg-brand-red text-white">
+            <tr>
+              <th className="px-4 py-3 text-left font-semibold">Size</th>
+              <th className="px-4 py-3 text-left font-semibold">Loading Index</th>
+              <th className="px-4 py-3 text-left font-semibold">Load Capacity (kg)</th>
+              <th className="px-4 py-3 text-left font-semibold">Speed Rating</th>
+              <th className="px-4 py-3 text-left font-semibold">Standard Rim</th>
+              <th className="px-4 py-3 text-left font-semibold">Section Width (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Overall Diameter (mm)</th>
+              <th className="px-4 py-3 text-left font-semibold">Max. Pressure (kPa)</th>
+              <th className="px-4 py-3 text-left font-semibold">UTQG</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#2A2A2A]">
+            {sizes.map((size, index) => (
+              <tr key={index} className="hover:bg-[#0A0A0A] transition-colors">
+                <td className="px-4 py-3 text-white font-medium">{size.size}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadIndex}</td>
+                <td className="px-4 py-3 text-gray-300">{size.loadCapacity}</td>
+                <td className="px-4 py-3 text-gray-300">{size.speedRating}</td>
+                <td className="px-4 py-3 text-gray-300">{size.standardRim}</td>
+                <td className="px-4 py-3 text-gray-300">{size.sectionWidth}</td>
+                <td className="px-4 py-3 text-gray-300">{size.overallDiameter}</td>
+                <td className="px-4 py-3 text-gray-300">{size.maxPressure}</td>
+                <td className="px-4 py-3 text-gray-300">{size.utqg}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 export function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -233,21 +272,29 @@ export function ProductDetailPage() {
   };
 
   const renderSpecificationTable = () => {
-    switch (product.category) {
-      case 'passenger':
-      case 'suv':
-      case '4x4':
-        return <PassengerCarTable sizes={product.sizes} />;
-      case 'light-truck':
-        return <LightTruckTable sizes={product.sizes} />;
-      case 'truck-bus':
-        return <TruckBusTable sizes={product.sizes} />;
-      case 'off-road':
-        return <OffRoadTable sizes={product.sizes} />;
-      default:
-        return <PassengerCarTable sizes={product.sizes} />;
-    }
-  };
+  switch (product.category) {
+    case 'passenger':
+    case 'suv':
+    case '4x4':
+    case 'ev-tyres':
+      return <PassengerCarTable sizes={product.sizes} />;
+
+    case 'light-truck':
+      return <LightTruckTable sizes={product.sizes} />;
+
+    case 'truck-bus':
+      return <TruckBusTable sizes={product.sizes} />;
+
+    case 'off-road':
+      return <OffRoadTable sizes={product.sizes} />;
+
+       case 'ev-tyres':
+      return <EVTable sizes={product.sizes} />;
+
+    default:
+      return <PassengerCarTable sizes={product.sizes} />;
+  }
+};
 
   return (
     <>

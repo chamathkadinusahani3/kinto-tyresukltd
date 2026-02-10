@@ -84,19 +84,19 @@ export const DealerRegistrationForm: React.FC = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '849064c5-e2ac-4294-89eb-8f5b0ec8f9eb',
+          access_key: '3fd2ddc1-ecad-4f31-88e5-457ec4e8ba68',
           subject: `New Dealer Registration - ${formState.businessName}`,
           from_name: 'Dealer Registration Form',
           replyto: formState.email,
           message: `
-Business Name: ${formState.businessName}
-Owner Name: ${formState.ownerName}
-Email: ${formState.email}
-Phone: ${formState.phone}
-Address: ${formState.address}
-Region: ${formState.region}
-Website: ${formState.website || 'N/A'}
-Monthly Sales Estimate: ${formState.monthlySalesEstimate}
+                  Business Name: ${formState.businessName}
+                  Owner Name: ${formState.ownerName}
+                  Email: ${formState.email}
+                  Phone: ${formState.phone}
+                  Address: ${formState.address}
+                  Region: ${formState.region}
+                  Website: ${formState.website || 'N/A'}
+                  Monthly Sales Estimate: ${formState.monthlySalesEstimate}
           `
         })
       });

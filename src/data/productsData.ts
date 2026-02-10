@@ -49,6 +49,7 @@ import R1MIN5 from "../assets/products/offroad/R1MIN5.png";
 import R1PLUS from "../assets/products/offroad/R1PLUS.png";
 import PR1 from "../assets/products/offroad/PR1.png";
 import RGN200 from "../assets/products/truckbus/RGN200.png";
+import PRESTIGEP07 from "../assets/products/evtyres/PRESTIGEP07.png";
 
 export interface TyreSize {
   size: string; // e.g., "185/55R15"
@@ -65,7 +66,7 @@ export interface TyreSize {
 export interface Product {
   id: string;
   name: string;
-  category: 'passenger' | 'light-truck' | 'truck-bus' | 'off-road';
+  category: 'passenger' | 'light-truck' | 'truck-bus' | 'off-road'| 'ev-tyres';
   tagline: string;
   description: string;
   image: string;
@@ -3378,17 +3379,53 @@ export const products: Product[] = [
     }
   ]
 },
+{
+  id: 'PRESTIGEP07',
+  name: 'PRESTIGE P07',
+  category: 'ev-tyres',
+  tagline: 'Luxury performance with a dramatic silence.',
+  description: 'Prestige P07 is engineered with Twist Edge-Cutting Technology to control block stiffness, prevent uneven wear and extend tyre life. Its precise groove and staggered sipe arrangement significantly reduce road noise while enhancing steering stability for a quieter, smoother and more comfortable driving experience.',
+  image: PRESTIGEP07,
+  season: 'All Season',
 
+  features: [
+    'Twist Edge-Cutting Technology to prevent uneven wear',
+    'Optimized groove arrangement for noise reduction',
+    'Staggered groove and sipe design for steering stability',
+    'Enhanced ride comfort with ultra-quiet performance',
+    'Extended tread life with balanced block stiffness'
+  ],
 
-
-
-
-
-
-
-
-
-
+  sizes: [
+    { size: '175/65R14', loadIndex: '86 XL', loadCapacity: '530', speedRating: 'H', standardRim: '5J', sectionWidth: '177', overallDiameter: '584', maxPressure: '340', utqg: '280 A A' },
+    { size: '185/65R14', loadIndex: '90 XL', loadCapacity: '600', speedRating: 'H', standardRim: '5 1/2J', sectionWidth: '189', overallDiameter: '596', maxPressure: '340', utqg: '280 A A' },
+    { size: '185/55R15', loadIndex: '86 XL', loadCapacity: '530', speedRating: 'V', standardRim: '6J', sectionWidth: '184', overallDiameter: '585', maxPressure: '340', utqg: '280 A A' },
+    { size: '185/60R15', loadIndex: '88 XL', loadCapacity: '560', speedRating: 'H', standardRim: '5 1/2J', sectionWidth: '189', overallDiameter: '603', maxPressure: '340', utqg: '280 A A' },
+    { size: '185/65R15', loadIndex: '92 XL', loadCapacity: '630', speedRating: 'H', standardRim: '5 1/2J', sectionWidth: '189', overallDiameter: '621', maxPressure: '340', utqg: '280 A A' },
+    { size: '195/55R15', loadIndex: '89 XL', loadCapacity: '580', speedRating: 'V', standardRim: '6J', sectionWidth: '201', overallDiameter: '595', maxPressure: '340', utqg: '280 A A' },
+    { size: '195/60R15', loadIndex: '92 XL', loadCapacity: '630', speedRating: 'H', standardRim: '6J', sectionWidth: '201', overallDiameter: '615', maxPressure: '340', utqg: '280 A A' },
+    { size: '195/65R15', loadIndex: '95 XL', loadCapacity: '690', speedRating: 'H', standardRim: '6J', sectionWidth: '201', overallDiameter: '635', maxPressure: '340', utqg: '280 A A' },
+    { size: '185/55R16', loadIndex: '87 XL', loadCapacity: '545', speedRating: 'V', standardRim: '6J', sectionWidth: '201', overallDiameter: '609', maxPressure: '340', utqg: '280 A A' },
+    { size: '195/60R16', loadIndex: '93 XL', loadCapacity: '650', speedRating: 'H', standardRim: '6J', sectionWidth: '201', overallDiameter: '640', maxPressure: '340', utqg: '280 A A' },
+    { size: '205/55ZR16', loadIndex: '94 XL', loadCapacity: '670', speedRating: 'W', standardRim: '6 1/2J', sectionWidth: '214', overallDiameter: '632', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/55R16', loadIndex: '97 XL', loadCapacity: '730', speedRating: 'H', standardRim: '7J', sectionWidth: '226', overallDiameter: '642', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/60R16', loadIndex: '96 XL', loadCapacity: '710', speedRating: 'H', standardRim: '6J', sectionWidth: '209', overallDiameter: '652', maxPressure: '340', utqg: '280 A A' },
+    { size: '205/45ZR17', loadIndex: '88 XL', loadCapacity: '560', speedRating: 'W', standardRim: '7J', sectionWidth: '206', overallDiameter: '616', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/45ZR17', loadIndex: '91 XL', loadCapacity: '615', speedRating: 'W', standardRim: '7J', sectionWidth: '213', overallDiameter: '626', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/50ZR17', loadIndex: '95 XL', loadCapacity: '690', speedRating: 'W', standardRim: '7J', sectionWidth: '226', overallDiameter: '648', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/55ZR17', loadIndex: '98 XL', loadCapacity: '750', speedRating: 'W', standardRim: '7J', sectionWidth: '226', overallDiameter: '668', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/60ZR17', loadIndex: '96 XL', loadCapacity: '710', speedRating: 'W', standardRim: '7J', sectionWidth: '215', overallDiameter: '690', maxPressure: '340', utqg: '280 A A' },
+    { size: '225/55ZR17', loadIndex: '101 XL', loadCapacity: '825', speedRating: 'W', standardRim: '7J', sectionWidth: '223', overallDiameter: '680', maxPressure: '340', utqg: '280 A A' },
+    { size: '215/55ZR18', loadIndex: '99 XL', loadCapacity: '775', speedRating: 'V', standardRim: '7J', sectionWidth: '215', overallDiameter: '693', maxPressure: '340', utqg: '280 A A' },
+    { size: '225/45ZR18', loadIndex: '95 XL', loadCapacity: '690', speedRating: 'V', standardRim: '7 1/2J', sectionWidth: '225', overallDiameter: '659', maxPressure: '340', utqg: '280 A A' },
+    { size: '225/50ZR18', loadIndex: '99 XL', loadCapacity: '775', speedRating: 'W', standardRim: '7J', sectionWidth: '223', overallDiameter: '683', maxPressure: '340', utqg: '280 A A' },
+    { size: '235/45ZR18', loadIndex: '98 XL', loadCapacity: '750', speedRating: 'W', standardRim: '8J', sectionWidth: '236', overallDiameter: '669', maxPressure: '340', utqg: '280 A A' },
+    { size: '235/50ZR18', loadIndex: '101 XL', loadCapacity: '825', speedRating: 'W', standardRim: '7 1/2J', sectionWidth: '245', overallDiameter: '693', maxPressure: '340', utqg: '280 A A' },
+    { size: '235/60ZR18', loadIndex: '103 XL', loadCapacity: '875', speedRating: 'W', standardRim: '8J', sectionWidth: '225', overallDiameter: '739', maxPressure: '340', utqg: '280 A A' },
+    { size: '245/45ZR18', loadIndex: '100 XL', loadCapacity: '800', speedRating: 'W', standardRim: '8J', sectionWidth: '243', overallDiameter: '677', maxPressure: '340', utqg: '280 A A' },
+    { size: '225/55ZR19', loadIndex: '99 XL', loadCapacity: '775', speedRating: 'V', standardRim: '8J', sectionWidth: '240', overallDiameter: '731', maxPressure: '340', utqg: '280 A A' }
+  ]
+},
 
 ];
 

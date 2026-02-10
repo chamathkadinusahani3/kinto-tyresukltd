@@ -7,17 +7,23 @@ import { Button } from '../components/ui/Button';
 import { NewsCard } from '../components/NewsCard';
 import { TyreSearchHero } from '../components/TyreSearchHero';
 import { motion } from 'framer-motion';
-import passenger from "../assets/passenger.png";
-import lighttruck from "../assets/lighttruck.png";
-import truckbus from "../assets/truckbus.png";
-import offroad from "../assets/offroad.png";
+import passenger from "../assets/home/passenger.png";
+import lighttruck from "../assets/home/lighttruck.png";
+import truckbus from "../assets/home/truckbus.png";
+import offroad from "../assets/home/offroad.png";
+import EV from "../assets/home/EV.png";
 import launch from "../assets/launch.png";
 import heroCarImg from '../assets/hero.png';
 import { AnimatePresence } from 'framer-motion';
 
 const container = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  hidden: {},
+  show: { transition: { staggerChildren: 0.2 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 const fadeInUp = {
@@ -25,10 +31,7 @@ const fadeInUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-};
+
 
 // Validate UK postcode format
 function validateUKPostcode(postcode: string): boolean {
@@ -138,7 +141,7 @@ export function HomePage() {
   const productCategories = [
     {
       id: 'passenger-suv',
-      name: 'Passenger & SUV',
+      name: 'Passenger Car',
       icon: Car,
       image: passenger,
     },
@@ -159,6 +162,12 @@ export function HomePage() {
       name: 'Off-The-Road',
       icon: Mountain,
       image: offroad
+    },
+    {
+      id: 'ev-tyres',
+      name: 'Electric Vehicle',
+      icon: Mountain,
+      image: EV
     }
   ];
 
@@ -233,71 +242,144 @@ export function HomePage() {
       </Helmet>
 
       <div className="flex flex-col min-h-screen bg-[#0A0A0A]">
-        
+        <section className="relative h-[600px] md:h-[700px] flex items-center overflow-hidden">
+
+  {/* Video Layer */}
+  <div className="absolute inset-0 z-0 overflow-hidden">
+    <iframe
+      title="Kinto Tyres Background Video"
+      src="https://www.youtube.com/embed/wZrNo51FK_0?autoplay=1&mute=1&controls=0&rel=0&showinfo=0&cc_load_policy=0&enablejsapi=1&loop=1&playlist=wZrNo51FK_0"
+      frameBorder="0"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+      className="pointer-events-none absolute
+        md:top-[-220px] md:left-1/2 md:w-[1920px] md:h-[1080px] md:-translate-x-1/2 md:scale-[1.15]
+        top-[-120px] left-1/2 w-[1400px] h-[788px] -translate-x-1/2 scale-[0.9]"
+    />
+  </div>
+
+  {/* Black overlay */}
+  <div className="absolute inset-0 z-10 bg-black/70" />
+
+  {/* Content */}
+  <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div className="max-w-2xl">
+
+      {/* Main Heading */}
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
+        className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+      >
+        A Leading Tyre Brand
+        <br />
+        from Japan
+      </motion.h1>
+
+      {/* First paragraph */}
+      <motion.p
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl"
+      >
+        It all starts with our passion for innovation, developing
+        superior-quality tyres under Japanese engineering.
+      </motion.p>
+
+      
+
+      {/* Buttons */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="flex flex-col sm:flex-row gap-4"
+      >
+        <Button href="/products" className="text-lg px-8 py-4">
+          View Products
+        </Button>
+        <Button
+          href="/about"
+          variant="outline"
+          className="text-white border-white hover:bg-white/10 text-lg px-8 py-4"
+        >
+          Learn More
+        </Button>
+      </motion.div>
+
+    </div>
+  </div>
+
+  
+
+</section>
+
+      
         {/* Hero Section 1 - Static Image */}
         <section className="relative h-[600px] md:h-[700px] flex items-center overflow-hidden">
+          
           <div className="absolute inset-0 z-0">
-            <motion.img
-              initial={{ scale: 1.1 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 10, ease: 'easeOut' }}
-              src={heroCarImg}
-              alt="Premium KINTO Japanese tyres for high performance vehicles"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
-          </div>
+  {/* Yellow radial glow */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-yellow/20 via-transparent to-transparent" />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <div className="max-w-2xl">
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-              >
-                A Leading Tyre Brand
-                <br />
-                from Japan
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl"
-              >
-                It all starts with our passion for innovation, developing
-                superior-quality tyres under Japanese engineering.
-              </motion.p>
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="text-base md:text-lg text-gray-400 mb-8 leading-relaxed max-w-xl"
-              >
-                KINTO Tyres has striven to be the best, we push the boundaries of
-                what's possible to improve performance, safety, and quality aiming
-                to be the ideal road companion for every journey.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Button href="/products" className="text-lg px-8 py-4">
-                  View Products
-                </Button>
-                <Button
-                  href="/about"
-                  variant="outline"
-                  className="text-white border-white hover:bg-white/10 text-lg px-8 py-4"
-                >
-                  Learn More
-                </Button>
-              </motion.div>
-            </div>
-          </div>
+  {/* FIXED background image */}
+  <div
+    className="absolute inset-0 bg-center bg-cover bg-no-repeat bg-fixed mix-blend-overlay"
+    style={{ backgroundImage: `url(${heroCarImg})` }}
+  />
+
+  {/* Dark gradient */}
+  <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
+</div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center justify-center min-h-screen">
+  <div className="max-w-2xl text-center">
+    <motion.h1
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.3 }}
+  className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+  style={{ color: "#FF0000" }}
+>
+  Enjoy 2 Years and
+  <br />
+  50,000 KM Warranty
+</motion.h1>
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      className="text-lg md:text-xl text-gray-300 mb-4 leading-relaxed max-w-xl mx-auto"
+    >
+      At KINTO Tyres, we begin with a passion for innovation, crafting superior-quality tyres through Japanese engineering.
+    </motion.p>
+    <motion.p
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+      className="text-base md:text-lg text-gray-400 mb-8 leading-relaxed max-w-xl mx-auto"
+    >
+      We continually push the boundaries of performance, safety, and quality—striving to be the ideal road companion for every journey.
+    </motion.p>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.6 }}
+      className="flex flex-col sm:flex-row gap-4 justify-center"
+    >
+      
+      <Button
+        href="/warranty"
+        variant="outline"
+        className="text-white border-white hover:bg-white/10 text-lg px-8 py-4"
+      >
+        Learn More
+      </Button>
+    </motion.div>
+  </div>
+</div>
         </section>
 
         {/* Tyre Search Section */}
@@ -327,67 +409,54 @@ export function HomePage() {
             </Button>
           </div>
         </section>
+ {/* products */}
+       <section className="py-20 bg-black text-white">
+      <div className="text-center mb-12">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl font-bold"
+        >
+          OUR PRODUCTS
+        </motion.h2>
+        <div className="w-16 h-1 bg-red-600 mx-auto mt-2"></div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-gray-400 max-w-2xl mx-auto mt-4"
+        >
+          Comprehensive tyre solutions for every vehicle type and driving condition
+        </motion.p>
+      </div>
 
-        {/* Product Categories */}
-        <section className="py-16 md:py-24 bg-[#0A0A0A]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInUp}
-              className="text-center mb-12"
-            >
-              <h2 className="text-3xl font-bold text-white mb-4">Our Products</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">
-                Comprehensive tyre solutions for every vehicle type and driving
-                condition
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={container}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.1 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            >
-              {productCategories.map(category => {
-                const IconComponent = category.icon;
-                return (
-                  <motion.div
-                    key={category.id}
-                    variants={item}
-                    className="group relative overflow-hidden rounded-xl border border-[#2A2A2A] bg-[#1A1A1A] hover:border-brand-red transition-all duration-300"
-                  >
-                    <Link to="/products" className="block">
-                      <div className="relative aspect-[4/3] overflow-hidden">
-                        <img
-                          src={category.image}
-                          alt={`${category.name} KINTO tyres - Premium Japanese quality`}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-black/50 to-transparent" />
-                        <div className="absolute top-4 right-4 bg-brand-red/90 backdrop-blur-sm p-3 rounded-lg">
-                          <IconComponent className="w-6 h-6 text-white" />
-                        </div>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-brand-red transition-colors">
-                          {category.name}
-                        </h3>
-                        <div className="flex items-center text-brand-red text-sm font-medium">
-                          View Products{' '}
-                          <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </div>
-        </section>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 px-6 md:px-20">
+        {productCategories.map((category) => (
+          <motion.div
+            key={category.id}
+            variants={item}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="relative group cursor-pointer overflow-hidden rounded-xl border border-[#000000] hover:border-black transition-all duration-300"
+          >
+            <Link to="/products" className="block">
+              <img
+                src={category.image}
+                alt={`${category.name} KINTO tyres - Premium Japanese quality`}
+                className="w-full h-auto transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
+                <h3 className="font-bold text-lg">
+                  {category.name} <span className="text-red-600">»</span>
+                </h3>
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+    </section>
 
 
        {/* Become Dealer + Distributor Section */}
@@ -408,14 +477,14 @@ export function HomePage() {
       Apply Now
     </Button>
   </div>
-
+ 
   {/* Become a Distributor */}
   <div className="flex-1 bg-[#c80000] text-white rounded-xl shadow-lg p-12 text-center">
     <h2 className="text-3xl md:text-4xl font-bold mb-4">
       BECOME A DISTRIBUTOR <span className="block">Join our global network</span>
     </h2>
     <p className="mb-6 text-lg md:text-xl text-black">
-      Apply now to become an authorized partner and distribute KINTO Tyres in your region.
+      Apply now to become an authorized partner and distribute KINTO Tyres in Europe region.
     </p>
     <Button
       as="a"

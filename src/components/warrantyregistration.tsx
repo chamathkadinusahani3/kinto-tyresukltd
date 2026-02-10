@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { AlertCircle, CheckCircle, X } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -21,28 +21,32 @@ interface WarrantyFormData {
   acceptedPolicy: boolean; 
 }
 
-export function WarrantyRegistrationForm() {
-  const [formData, setFormData] = useState<WarrantyFormData>({
-    firstName: '',
-    surname: '',
-    address: '',
-    city: '',
-    mobilePhone: '',
-    dealerShop: '',
-    dateOfPurchase: '',
-    tyrePattern: '',
-    tyreSize: '',
-    tyreCount: '1',
-    dotNumber: '',
-    currentMileage: '',
-    vehicleNo: '',
-    invoiceImage: null,
-    acceptedPolicy: false
-  });
+const initialState: WarrantyFormData = {
+  firstName: '',
+  surname: '',
+  address: '',
+  city: '',
+  mobilePhone: '',
+  dealerShop: '',
+  dateOfPurchase: '',
+  tyrePattern: '',
+  tyreSize: '',
+  tyreCount: '1',
+  dotNumber: '',
+  currentMileage: '',
+  vehicleNo: '',
+  invoiceImage: null,
+  acceptedPolicy: false
+};
 
+export function WarrantyRegistrationForm() {
+  const [formData, setFormData] = useState<WarrantyFormData>(initialState);
   const [errors, setErrors] = useState<{ [key in keyof WarrantyFormData]?: string }>({});
   const [loading, setLoading] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Ref to reset file input
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type, checked, files } = e.target as HTMLInputElement;
@@ -50,7 +54,8 @@ export function WarrantyRegistrationForm() {
       ...prev,
       [name]: type === 'checkbox' ? checked : type === 'file' ? files?.[0] || null : value
     }));
-    // Clear error for this field when user starts typing
+
+    // Clear error for this field
     if (errors[name as keyof WarrantyFormData]) {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
@@ -76,9 +81,10 @@ export function WarrantyRegistrationForm() {
     return Object.keys(newErrors).length === 0;
   };
 
+
   const uploadToCloudinary = async (file: File): Promise<string> => {
-    const cloudName = "dqftsrquy"; // <-- replace
-    const unsignedUploadPreset = "warranty_upload"; // <-- replace
+    const cloudName = "dffjb2rl4"; // replace with your Cloudinary name
+    const unsignedUploadPreset = "warranty_upload"; // replace with your preset
 
     const data = new FormData();
     data.append("file", file);
@@ -90,7 +96,7 @@ export function WarrantyRegistrationForm() {
     });
 
     const result = await response.json();
-    return result.secure_url; // Cloudinary URL
+    return result.secure_url;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -107,12 +113,12 @@ export function WarrantyRegistrationForm() {
       }
 
       const dataToSend = new FormData();
-      dataToSend.append("access_key", "849064c5-e2ac-4294-89eb-8f5b0ec8f9eb"); // Web3Forms access key
+      dataToSend.append("access_key", "3fd2ddc1-ecad-4f31-88e5-457ec4e8ba68"); // Web3Forms access key
       dataToSend.append("subject", "New Warranty Registration");
       dataToSend.append("from_name", `${formData.firstName} ${formData.surname}`);
       dataToSend.append("replyto", formData.mobilePhone);
 
-      // Append all other form fields
+      // Append other form fields
       Object.entries(formData).forEach(([key, value]) => {
         if (key === "invoiceImage") {
           dataToSend.append("invoiceImageURL", invoiceURL);
@@ -129,26 +135,13 @@ export function WarrantyRegistrationForm() {
       const result = await response.json();
       if (result.success) {
         setSubmitStatus('success');
+
+        // Reset everything including file input
         setTimeout(() => {
-          setFormData({
-            firstName: '',
-            surname: '',
-            address: '',
-            city: '',
-            mobilePhone: '',
-            dealerShop: '',
-            dateOfPurchase: '',
-            tyrePattern: '',
-            tyreSize: '',
-            tyreCount: '1',
-            dotNumber: '',
-            currentMileage: '',
-            vehicleNo: '',
-            invoiceImage: null,
-            acceptedPolicy: false
-          });
+          setFormData(initialState);
           setErrors({});
           setSubmitStatus('idle');
+          if (fileInputRef.current) fileInputRef.current.value = '';
         }, 4000);
       } else {
         setSubmitStatus('error');
@@ -191,7 +184,6 @@ export function WarrantyRegistrationForm() {
         transition={{ duration: 0.6 }}
         className="bg-[#1A1A1A] border border-[#2A2A2A] rounded-2xl shadow-glow p-8 md:p-12 space-y-6"
       >
-        {/* Form fields */}
         {Object.entries(formData).map(([key, value]) => {
           if (key === "invoiceImage") {
             return (
@@ -200,6 +192,7 @@ export function WarrantyRegistrationForm() {
                   Attach Invoice Image <span className="text-red-500">*</span>
                 </label>
                 <input
+                  ref={fileInputRef}
                   type="file"
                   accept="image/*"
                   name={key}

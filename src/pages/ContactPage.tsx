@@ -65,7 +65,7 @@ export function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: '849064c5-e2ac-4294-89eb-8f5b0ec8f9eb',
+          access_key: '3fd2ddc1-ecad-4f31-88e5-457ec4e8ba68',
           subject: `New Contact Message from ${formState.name}`,
           from_name: 'Kinto Tyres Website',
           replyto: formState.email,
